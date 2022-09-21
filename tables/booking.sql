@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 20, 2022 at 10:21 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Sep 21, 2022 at 10:28 AM
+-- Server version: 5.7.38-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -46,27 +45,27 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`bid`, `event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`) VALUES
-(1, '', '', 0, '2022-09-30', '2023-11-15', ' daman', 0, '', NULL, 0),
-(2, '', '', 0, '2022-09-30', '2023-11-15', ' daman', 0, '', NULL, 0),
-(3, 'birthday', '', 0, '2022-09-27', '2022-09-27', ' navsari', 0, '', NULL, 0),
-(4, 'birthday', '', 0, '2022-09-27', '2022-09-27', ' navsari', 0, '', NULL, 0),
-(5, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', NULL, 0),
-(6, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', NULL, 0),
-(7, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', NULL, 0),
-(8, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', NULL, 0),
-(9, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', NULL, 0),
-(10, 'portfolio shoot', '', 6, '2022-09-19', '2022-09-19', ' Bardoli', 0, '', NULL, 0),
-(11, 'party', '', 6, '2022-09-20', '2022-09-20', ' uka tarsadiya ', 0, '', NULL, 0),
-(12, 'competetion', '', 6, '2022-09-06', '2022-09-14', ' nvs', 0, '', NULL, 0),
-(13, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', NULL, 0),
-(14, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', NULL, 0),
-(15, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', NULL, 31000),
-(16, 'wedding', '', 6, '2022-09-14', '2022-09-01', ' nvs', 0, '', NULL, 88500),
-(17, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', NULL, 31000),
-(18, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', NULL, 31000),
-(19, 'wedding', '', 6, '2022-09-13', '2022-09-01', ' asg', 0, '', NULL, 57500),
-(20, 'inogration/opening', '', 6, '2023-09-27', '2022-09-15', ' fdj', 0, '', NULL, 8000),
-(21, 'inogration/opening', '', 6, '2022-09-21', '2022-09-21', ' dahz', 0, '', NULL, 80500);
+(1, 'birthday', '', 6, '2022-09-30', '2023-11-15', ' daman', 0, '', 'approved', 8000),
+(2, 'meeting', '', 6, '2022-09-30', '2023-11-15', ' daman', 0, '', 'pending', 13000),
+(3, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'pending', 0),
+(4, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'pending', 0),
+(5, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'pending', 0),
+(6, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'pending', 0),
+(7, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'pending', 0),
+(8, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'pending', 0),
+(9, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'pending', 0),
+(10, 'portfolio shoot', '', 6, '2022-09-19', '2022-09-19', ' Bardoli', 0, '', 'pending', 0),
+(11, 'party', '', 6, '2022-09-20', '2022-09-20', ' uka tarsadiya ', 0, '', 'pending', 0),
+(12, 'competetion', '', 6, '2022-09-06', '2022-09-14', ' nvs', 0, '', 'pending', 0),
+(13, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 0),
+(14, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 0),
+(15, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 31000),
+(16, 'wedding', '', 6, '2022-09-14', '2022-09-01', ' nvs', 0, '', 'pending', 88500),
+(17, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'pending', 31000),
+(18, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'pending', 31000),
+(19, 'wedding', '', 6, '2022-09-13', '2022-09-01', ' asg', 0, '', 'pending', 57500),
+(20, 'inogration/opening', '', 6, '2023-09-27', '2022-09-15', ' fdj', 0, '', 'pending', 8000),
+(21, 'inogration/opening', '', 6, '2022-09-21', '2022-09-21', ' dahz', 0, '', 'pending', 80500);
 
 --
 -- Indexes for dumped tables
@@ -87,8 +86,6 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `booking`
   MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
