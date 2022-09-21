@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <script>
-        var path = window.location.pathname;
-        var page = path.split("/").pop();
-        
-    </script>
+    
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -29,6 +25,13 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
+
+  <style type="text/css">
+    table,tr,td{
+      border: 2px solid black;
+      padding: 10px;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -56,48 +59,45 @@
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">  
-                <div class="contact_form-container"> <hr> 
-                  <h3> Name : Varshal Patel </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                    <p> Status : Rejected </p>
-                  <hr>
+                <div class="contact_form-container">
+                  <center>
+                    
+                  <table>
+                    <tr>
+                      <td> Name </td>
+                      <td> Event </td>
+                      <td> Start </td>
+                      <td> End </td>
+                      <td> Status </td>
+                    </tr>
 
-                  <h3> Name : Nishtha Tandel </h3>
-                  <p> Event Type : Birthday </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Status : Accepted </p>
-                  <hr>
+                  <?php 
+                  $db = mysqli_connect('localhost', 'root', 'root', 'sap');
+                      $sql="select * from booking join users on booking.uid=users.uid where bstatus!=\"pending\";";
+                      $results = mysqli_query($db,$sql);
+                      while ($data = mysqli_fetch_array($results)) { ?>
+                        <tr>
+                          <td>
+                            <?php echo $data['fname'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['event'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['start'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['end'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['bstatus'];?>
+                          </td>
+                        </tr>
 
-                  <h3> Name : Aamena Shaikh </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                  <p> Status : Accepted </p>
-                  <hr>
-
-                  <h3> Name : Jainam Shah </h3>
-                  <p> Event Type : Birthday </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                  <p> Status : Accepted </p>
-                  <hr>
-
-                  <h3> Name : Kashish Sukhadiya </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                  <p> Status : Rejected </p> 
-                  <hr>
-
-                  <h3> Name : Nidhi Patel </h3>
-                  <p> Event Type : Pre-Wedding </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                  <p> Status : Rejected </p>
-                  <hr>
+                      <?php } ?>
+                    </table>
+                  </center>
+                  
                 </div>
             </div>
           </div>

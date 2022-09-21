@@ -36,6 +36,7 @@ session_start();
     table, tr, td {
       border: 1px solid black;
       text-align: center;
+
     }
   </style>
 </head>
@@ -66,7 +67,6 @@ session_start();
           <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="contact_form-container"> 
-                  <form method="post">
                       <table>
                         <tr>
                           <td> First Name </td>
@@ -75,16 +75,14 @@ session_start();
                           <td> User Name </td>
                           <td> Password </td>
                           <td> Phone Number </td>
-                          <td> Gende </td>
+                          <td> Gender </td>
                           <td> Email </td>
                           <td> Address </td>
                           <td> User Type </td>
                           <td> Actions </td>
-
-
                         </tr>
                     <?php 
-                      $db = mysqli_connect('localhost', 'root', '', 'sap');
+                      $db = mysqli_connect('localhost', 'root', 'root', 'sap');
                       $sql="select * from users;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
@@ -232,8 +230,9 @@ session_start();
   <!-- footer section -->
   <?php
     include '../../footers/footer.php';
+  }
   ?>
-
+ 
 </body>
 
 </html>
