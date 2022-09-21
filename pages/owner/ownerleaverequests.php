@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <script>
-        var path = window.location.pathname;
-        var page = path.split("/").pop();
-        
-    </script>
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -29,6 +24,14 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
+
+  <style type="text/css">
+    table,tr,td,th{
+      border: 2px solid black;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -56,64 +59,56 @@
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
-              <form action="" method="post">
-                <div class="contact_form-container"> <hr> 
-                  <h3> Name : Varshal Patel </h3>
-                  <p> Reason : Relatives Marriage <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 15/08/2022 <p>   
-                  <button> Approve </button>
-                  <button> Reject </button>
-                  <hr>
+                <div class="contact_form-container">
 
-                  <h3> Name : Nishtha Tandel </h3>
-                  <p> Reason : Something </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <button> Approve </button>
-                  <button> Reject </button> 
-                  <hr>
+                <center>
+                    <?php if(isset($_SESSION['message'])) { ?>
+                    <div id="msg" style="background-color: cyan; color: black">
+                    <br> <h5>
+                      <?php echo $_SESSION['message'];
+                      unset($_SESSION['message']); ?>  
+                      </h5> <br>
+                    </div>
+                    <br> <br>
+                    <?php } ?>
+                  <table>
+                    <tr>
+                    <th> Name </th>
+                      <th> Reason </th>
+                      <th> Start Date </th>
+                      <th> End Date </th>
+                      <th colspan="2"> Actions </th>
+                    </tr>
 
-                  <h3> Name : Aamena Shaikh </h3>
-                  <p> Reason : Something <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                    <form>
-                      <button> Approve </button>
-                      <button> Reject </button>
-                    </form> 
-                  <hr>
+                  <?php
+                      include '../../conn.php';
+                      $sql="select * from leaves join users on leaves.uid=users.uid where leavestatus=\"pending\";";
+                      $results = mysqli_query($db,$sql);
+                      while ($data = mysqli_fetch_array($results)) { ?>
+                        <tr>
+                          <td>
+                            <?php echo $data['fname'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['reason'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['startdate'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['enddate'];?>
+                          </td>
+                          <td>
+                            <a href="ownerleaverequests.php?approved=<?php echo $data['lid'];?>" style="color:black; background-color: lime; border: 2px solid black"> Approve </a>
+                          </td>
+                          <td>
+                            <a href="ownerleaverequests.php?rejected=<?php echo $data['lid'];?>" style="color:black; background-color: red; border: 2px solid black"> Reject </a>
+                          </td>
+                        </tr>
 
-                  <h3> Name : Jainam Shah </h3>
-                  <p> Reason : Something </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                    <form>
-                      <button> Approve </button>
-                      <button> Reject </button>
-                    </form>
-                  <hr>
-
-                  <h3> Name : Kashish Sukhadiya </h3>
-                  <p> Reason : Something <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                    <form>
-                      <button> Approve </button>
-                      <button> Reject </button>
-                    </form>
-                  <hr>
-
-                  <h3> Name : Nidhi Patel </h3>
-                  <p> Reason : Something </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                    <form>
-                      <button> Approve </button>
-                      <button> Reject </button>
-                    </form>
-                  <hr>
-
+                      <?php } ?>
+                    </table>
+                      </center>
                 </div>
               </form>
             </div>
@@ -122,7 +117,23 @@
       </div>
     </section>
   
-  
+    <?php
+      if(isset($_GET['approved'])) {
+        $lid=$_GET['approved'];
+        $sql="update leaves set leavestatus='approved' where lid=$lid;";
+        mysqli_query($db, $sql);
+        $_SESSION['message']="Request have been Approved Successfully.";
+        echo "<script type='text/javascript'>document.location.href='ownerleaverequests.php';</script>";
+      }
+
+      if(isset($_GET['rejected'])) {
+        $lid=$_GET['rejected'];
+        $sql="update leaves set leavestatus='rejected' where lid=$lid;";
+        mysqli_query($db, $sql);
+        $_SESSION['message']="Request have been rejected Successfully.";
+        echo "<script type='text/javascript'>document.location.href='ownerleaverequests.php';</script>";
+      }
+    ?>
 
   <!-- info section -->
   <?php

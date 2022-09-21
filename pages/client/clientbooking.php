@@ -4051,7 +4051,7 @@
     $instruction=$_POST['instruction'];
     $services=$_POST['services'];
 
-    $sql="INSERT INTO booking(event,personalized, uid, start, end, baddress, travelcharges, instructions, totalamount) VALUES ('$event', '$personalized', '$uid', '$bstart', '$bend', '$baddress', '$travelcharges', '$instruction', '$total');";
+    $sql="INSERT INTO booking(event,personalized, uid, start, end, baddress, bstatus, travelcharges, instructions, totalamount) VALUES ('$event', '$personalized', '$uid', '$bstart', '$bend', '$baddress', 'pending', '$travelcharges', '$instruction', '$total');";
     mysqli_query($db, $sql);
     $_SESSION['msg'] = "New Record Inserted";
     $sql="select * from booking;";

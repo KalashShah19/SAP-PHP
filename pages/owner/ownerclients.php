@@ -33,10 +33,10 @@ session_start();
   <link href="../../css/responsive.css" rel="stylesheet" />
 
   <style>
-    table, tr, td {
+    table, tr, td, th {
       border: 1px solid black;
       text-align: center;
-
+      /* padding:5px; */
     }
   </style>
 </head>
@@ -67,22 +67,23 @@ session_start();
           <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="contact_form-container"> 
+                  <center>
                       <table>
                         <tr>
-                          <td> First Name </td>
-                          <td> Middle Name </td>
-                          <td> Last Name </td>
-                          <td> User Name </td>
-                          <td> Password </td>
-                          <td> Phone Number </td>
-                          <td> Gender </td>
-                          <td> Email </td>
-                          <td> Address </td>
-                          <td> User Type </td>
-                          <td> Actions </td>
+                          <th> First Name </th>
+                          <th> Middle Name </th>
+                          <th> Last Name </th>
+                          <th> User Name </th>
+                          <th> Password </th>
+                          <th> Phone Number </th>
+                          <th> Gender </th>
+                          <th> Email </th>
+                          <th> Address </th>
+                          <th> User Type </th>
+                          <th> Actions </th>
                         </tr>
                     <?php 
-                      $db = mysqli_connect('localhost', 'root', 'root', 'sap');
+                      include '../../conn.php';
                       $sql="select * from users;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
@@ -126,7 +127,7 @@ session_start();
                       }
                     ?>
                       </table>
-                    </form>
+                  </center>
                 </div>
               </div>
             </div>

@@ -29,6 +29,14 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
+
+  <style>
+    table, tr, td, th {
+      border: 1px solid black;
+      text-align: center;
+      padding:10px;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -50,46 +58,45 @@
             Contact Messages
           </h2>
           <p>
-            Messages from users
+            Messages from unknown users
           </p>
         </div>
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
-              <form action="" method="post">
-                <div class="contact_form-container"> <hr> 
-                    <p> First Name : Kalash <p> 
-                    <p> Middle Name : Abhay <p>  
-                    <p> Last Name : Shah </p>   
-                    <p> Email : kalash@gmail.com </p>
-                    <p> Message : I want to know the estimate costs of portfolio shoot </p> <hr>
+                <div class="contact_form-container"> 
+                  <center>
+                    <table>
+                      <tr>
+                        <th> First Name </th>
+                        <th> Middle Name </th>
+                        <th> Last Name </th>
+                        <th> Email </th>
+                        <th> Message </th>
+                      </tr>
+
+                      <?php
+                        include '../../conn.php';
+                        $sql="select * from contact;";
+                        $results = mysqli_query($db,$sql);
+                        while ($data = mysqli_fetch_array($results)) { ?>
+                      <tr>
+                        <td> <?php echo $data['cfname']; ?></td>
+                        <td> <?php echo $data['cmname']; ?></td>
+                        <td> <?php echo $data['clname']; ?></td>
+                        <td> <?php echo $data['cemail']; ?></td>
+                        <td> <?php echo $data['cmsg']; ?></td>
+                      </tr>
+                      <?php } ?>
+                    </table>
+                  </center>
                     
-                    <p> First Name : Nishtha  </p>
-                    <p> Middle Name : Satish </p>
-                    <p> Last Name : Tandel </p>
-                    <p> Email : nishu@gmail.com </p>
-                    <p> Message : How can i Contact the Developer of your Website? </p> <hr>
-                    
-                    <p> First Name : Smit </p> 
-                    <p> Middle Name : Bhavesh </p>
-                    <p> Last Name : Shah </p>
-                    <p> Email : smit@gmail.com </p>
-                    <p> Message : What is the average cost of a wedding shoot? </p> <hr>
-                    
-                    <p> First Name :  Virti </p> 
-                    <p> Middle Name : Deepak </p>
-                    <p> Last Name : Mehta </p>
-                    <p> Email : virti@gmail.com </p>
-                    <p> I want to Apply for Job </p> <hr>
-                    </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  
-  
 
   <!-- info section -->
   <?php

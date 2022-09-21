@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,10 @@
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
   <style type="text/css">
-    table,tr,td{
+    table,tr,td,th{
       border: 2px solid black;
-      padding: 10px;
+      padding: 15px;
+      text-align: center;
     }
   </style>
 </head>
@@ -58,18 +60,28 @@
           <div class="row">
             <div class="col-md-8 mx-auto">
               <form method="post">
-                <div class="contact_form-container"> <hr> 
+                <div class="contact_form-container">
+                  <center>
+                    <?php if(isset($_SESSION['message'])) { ?>
+                    <div id="msg" style="background-color: cyan; color: black">
+                    <br> <h5>
+                      <?php echo $_SESSION['message'];
+                      unset($_SESSION['message']); ?>  
+                      </h5> <br>
+                    </div>
+                    <br> <br>
+                    <?php } ?>
                   <table>
                     <tr>
-                      <td> Name </td>
-                      <td> Event </td>
-                      <td> Start </td>
-                      <td> End </td>
-                      <td colspan="2"> Actions </td>
+                      <th> Name </th>
+                      <th> Event </th>
+                      <th> Start </th>
+                      <th> End </th>
+                      <th colspan="2"> Actions </th>
                     </tr>
 
-                  <?php 
-                  $db = mysqli_connect('localhost', 'root', 'root', 'sap');
+                  <?php
+                      include '../../conn.php';
                       $sql="select * from booking join users on booking.uid=users.uid where bstatus=\"pending\";";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
@@ -87,16 +99,16 @@
                             <?php echo $data['end'];?>
                           </td>
                           <td>
-                            <a href=""> Approve </a>
+                            <a href="ownerbooking.php?approved=<?php echo $data['bid'];?>" style="color:black; background-color: lime; border: 2px solid black"> Approve </a>
                           </td>
                           <td>
-                            <a href=""> Reject </a>
+                            <a href="ownerbooking.php?rejected=<?php echo $data['bid'];?>" style="color:black; background-color: red; border: 2px solid black"> Reject </a>
                           </td>
                         </tr>
 
                       <?php } ?>
                     </table>
-                  
+                      </center>
 
                 </div>
               </form>
@@ -105,8 +117,24 @@
         </div>
       </div>
     </section>
-  
-  
+                        
+    <?php
+      if(isset($_GET['approved'])) {
+        $bid=$_GET['approved'];
+        $sql="update booking set bstatus='approved' where bid=$bid;";
+        mysqli_query($db, $sql);
+        $_SESSION['message']="Request have been Approved Successfully.";
+        echo "<script type='text/javascript'>document.location.href='ownerbooking.php';</script>";
+      }
+
+      if(isset($_GET['rejected'])) {
+        $bid=$_GET['rejected'];
+        $sql="update booking set bstatus='rejected' where bid=$bid;";
+        mysqli_query($db, $sql);
+        $_SESSION['message']="Request have been rejected Successfully.";
+        echo "<script type='text/javascript'>document.location.href='ownerbooking.php';</script>";
+      }
+    ?>
 
   <!-- footer section -->
   <?php

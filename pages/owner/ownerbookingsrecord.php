@@ -72,7 +72,7 @@
                     </tr>
 
                   <?php 
-                  $db = mysqli_connect('localhost', 'root', 'root', 'sap');
+                  include '../../conn.php';
                       $sql="select * from booking join users on booking.uid=users.uid where bstatus!=\"pending\";";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>

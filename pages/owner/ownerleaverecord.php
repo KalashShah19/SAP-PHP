@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <script>
-        var path = window.location.pathname;
-        var page = path.split("/").pop();
-        
-    </script>
+    
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -29,6 +25,14 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
+
+  <style type="text/css">
+    table,tr,td,th{
+      border: 2px solid black;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -56,52 +60,55 @@
           <div class="">
             <div class="row">
               <div class="col-md-8 mx-auto">
-                <form action="" method="post">
-                  <div class="contact_form-container"> <hr> 
-                    <h3> Name : Varshal Patel </h3>
-                    <p> Reason : Relatives Marriage <p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 15/08/2022 <p>   
-                        <p> Status : Rejected </p>
-                    <hr>
-    
-                    <h3> Name : Nishtha Tandel </h3>
-                    <p> Reason : Something </p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Status : Accepted </p>
-                    <hr>
-    
-                    <h3> Name : Aamena Shaikh </h3>
-                    <p> Reason : Something <p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 12/08/2022 <p>  
-                    <p> Status : Accepted </p>
-                    <hr>
-    
-                    <h3> Name : Jainam Shah </h3>
-                    <p> Reason : Something </p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 12/08/2022 <p>   
-                    <p> Status : Accepted </p>
-                    <hr>
-    
-                    <h3> Name : Kashish Sukhadiya </h3>
-                    <p> Reason : Something <p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 12/08/2022 <p>   
-                    <p> Status : Accepted </p>
-                    <hr>
-    
-                    <h3> Name : Nidhi Patel </h3>
-                    <p> Reason : Something </p> 
-                    <p> Start Date : 12/08/2022 <p> 
-                    <p> Start Date : 12/08/2022 <p>  
-                    <p> Status : Rejected </p>
-                    <hr>
-    
+                  <div class="contact_form-container"> 
+
+                  <center>
+                    <?php if(isset($_SESSION['message'])) { ?>
+                    <div id="msg" style="background-color: cyan; color: black">
+                    <br> <h5>
+                      <?php echo $_SESSION['message'];
+                      unset($_SESSION['message']); ?>  
+                      </h5> <br>
+                    </div>
+                    <br> <br>
+                    <?php } ?>
+                  <table>
+                    <tr>
+                      <th> Name </th>
+                      <th> Reason </th>
+                      <th> Start Date </th>
+                      <th> End Date </th>
+                      <th> Status </th>
+                    </tr>
+
+                  <?php
+                      include '../../conn.php';
+                      $sql="select * from leaves join users on leaves.uid=users.uid where leavestatus!=\"pending\";";
+                      $results = mysqli_query($db,$sql);
+                      while ($data = mysqli_fetch_array($results)) { ?>
+                        <tr>
+                          <td>
+                            <?php echo $data['fname'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['reason'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['startdate'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['enddate'];?>
+                          </td>
+                          <td>
+                            <?php echo $data['leavestatus'];?>
+                          </td>
+                          
+                        </tr>
+
+                      <?php } ?>
+                    </table>
+                      </center>
                   </div>
-                </form>
               </div>
             </div>
           </div>

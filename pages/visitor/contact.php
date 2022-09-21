@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <script>
@@ -58,39 +59,52 @@
       <div class="">
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <form action="" method="post">
+            <center>    
+              <?php if(isset($_SESSION['message'])) { ?>
+              <div id="msg" style="background-color: cyan; color: black">
+              <br> <h5>
+                <?php echo $_SESSION['message'];
+                unset($_SESSION['message']); ?>  
+                </h5> <br>
+              </div>
+              <br> <br>
+              <?php } ?>
+            </center>
+            <form method="post">
               <div class="contact_form-container">
                 <div>
                   <div>
                     <label> First Name : </label>
-                    <input type="text" name="fname">
+                    <input type="text" name="cfname">
                   </div>
                   <div>
                     <label> Middle Name : </label>
-                    <input type="text" name="mname">
+                    <input type="text" name="cmname">
                   </div>
                   <div>
                     <label> Last Name : </label>
-                    <input type="text" name="lname">
+                    <input type="text" name="clname">
                   </div>
                   <div>
                     <label> Email : </label>
-                    <input type="email" name="email">
+                    <input type="email" name="cemail">
                   </div>
                   <div class="">
                     <label> Message : </label>
-                    <input type="text" class="message_input" name="msg">
+                    <input type="text" class="message_input" name="cmsg">
                   </div>
                   <div class=" d-flex justify-content-center ">
                     <button type="submit" name="submit">
                       Send
                     </button>
                   </div>
+                  <center>
                     <span> <br> <br> <h4>
                       Email : abhayshah@gmail.com
                       <br> <br>
                       Mobile Number : 9874563210
                     </h4></span>
+                  </center>
                 </div>
               </div>
             </form>
@@ -105,11 +119,19 @@
 <!-- Backend -->
 <?php
     if(isset($_POST['submit'])) {
-    $fname=$_POST['fname'];
-    $mname=$_POST['mname'];
-    $lname=$_POST['lname'];
-    $email=$_POST['email'];
-    $msg=$_POST['msg'];
+    $fname=$_POST['cfname'];
+    $mname=$_POST['cmname'];
+    $lname=$_POST['clname'];
+    $email=$_POST['cemail'];
+    $msg=$_POST['cmsg'];
+
+    include '../../conn.php';
+    $sql="INSERT INTO `contact`(`cfname`, `cmname`, `clname`, `cemail`, `cmsg`) VALUES ('$fname', '$mname', '$lname', '$email', '$msg');";
+    $results = mysqli_query($db,$sql);
+    $_SESSION['message']="Thank You for Contacting us, Your Message has been Delivered.";
+    echo "<script type='text/javascript'>document.location.href='contact.php';</script>";
+
+
   }
 ?>
 
