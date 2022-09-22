@@ -88,7 +88,7 @@
 
   <!-- Backend validation -->
   <?php
-    $db = mysqli_connect('localhost', 'root', '', 'sap');
+    include '../../conn.php';
     if(isset($_POST['submit'])) {
       $user=$_POST['user'];
       $pass=$_POST['pass'];
@@ -124,11 +124,16 @@
 
     if(isset($_POST['forgot'])){
       $str="";
-      $sql="select email from users;";
+      $row=array();
+      $sql="select uid,email,usertype from users;";
       $results = mysqli_query($db,$sql);
       while ($row = mysqli_fetch_array($results)) {
         $email=$row['email'];
+        $usertype=$row['usertype'];
+        $uid=$row['uid'];
         $str=$str.$email.",";
+        $data[$row['email']]=$row['uid'];
+
       }
     }
     ?>
@@ -140,22 +145,43 @@
       var phpmail="";
       var i=0;
       var flag=0;
+      var arr = <?php echo json_encode($data);?>;
+      var uid=0;
       email=prompt("Enter Your Email : ");
       str="<?php echo $str;?>";
       mails=str.split(",");
       for(i;i<mails.length;i++) {
         if(email==mails[i]){
-          flag=1;
-          phpmail=email;
+          var digits = '0123456789';
+          var OTP = "";
+          for (let i = 0; i < 4; i++ ) {
+              OTP += digits[Math.floor(Math.random() * 10)];
+          }
+          Email.send({
+          SecureToken : "68b33b4e-ffdd-41f7-98ba-2a38aee89aa9",
+          To : email,
+          From : "snapdragon7gamer@gmail.com",
+          Subject : "SAP OTP",
+          Body : "Your SAP OTP is " + OTP
+          }).then(
+            flag=1
+          );
           break;
+        }
       }
-    }
       
       if(flag==0){
         alert("Enter Valid Email;"); 
       }
       else {
-        alert("OTP Has Been Sent to Your Email.");
+        var inp=prompt("OTP has been sent to your Email, kindly check your spam section and enter the OTP below : ");
+        if(inp==OTP) {
+          document.location.href='../client/clienthome.php';
+          alert("Coreect!!");
+        }
+        else {
+          alert("Wrong OTP.");
+        }
       }
     }
   </script>
