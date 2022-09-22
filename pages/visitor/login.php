@@ -115,7 +115,7 @@
         else if($type=="admin")
           echo "<script type='text/javascript'>document.location.href='../admin/adminbooking.php';</script>";
         else if($type=="owner")
-          echo "<script type='text/javascript'>document.location.href='../owner/ownerclients.php';</script>";
+        echo "<script type='text/javascript'>document.location.href='../owner/ownerclients.php';</script>";
       }
       else {
         echo '<script> alert("Login Failed. Enter Valid Credentials !!");</script>';

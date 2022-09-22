@@ -49,244 +49,107 @@
       </div>
       <div class="portfolio_container layout_padding2">
         <div class="row">
+          <center>
           <div class="column">
+            <center style="background-color: black; color: white"> Album </center>
             <div class="img-box b-1">
-              <img src="../../products/album.jpg" alt="Cup">
+              <img src="../../products/album.jpg" onclick="" alt="Cup">
               <div class="info-box">
                 <a href="clientalbum.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
-            <div class="img-box b-1">
-              <img src="../../products/cushion.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/bedsheet.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/cushion.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-          </div>
+            <br><br>
 
-          <div class="column">
+            <center style="background-color: black; color: white"> Short Film </center>
             <div class="img-box b-1">
-              <img src="../../products/film.png" alt="">
+              <img src="../../products/film.png" alt="Cup">
               <div class="info-box">
-                <a href="clientfilm.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-              </div>
-              <div class="img-box b-1">
-                <img src="../../products/bedsheet.jpg" alt="">
-                <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-              </div>
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
+                <a href="clientalbum.php" class="info">
                 </a>
               </div>
             </div>
-            <div class="img-box b-1">
-              <img src="../../products/frame.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
+            <br><br>
+
+            <center style="background-color: black; color: white"> Cup </center>
             <div class="img-box b-1">
               <img src="../../products/cup.jpg" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
-          </div>
-         
-
-          <div class="column">
+            <br><br>
+            <center style="background-color: black; color: white"> Stickers </center>
             <div class="img-box b-1">
-              <img src="../../products/keychain.jpg" alt="">
+              <img src="../../products/stickers.jfif" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
+            </div>
+            <br><br>
+            <center style="background-color: black; color: white"> Bed Sheet </center>
+            <div class="img-box b-1">
+              <img src="../../products/bedsheet.jpg" alt="">
+              <div class="info-box">
+                <a href="clientinfo.php" class="info">
                 </a>
               </div>
             </div>
+            <br><br>
+            <center style="background-color: black; color: white"> Cushion </center>
             <div class="img-box b-1">
               <img src="../../products/cushion.jpg" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
+          <br><br>
+
+          <center style="background-color: black; color: white"> Key Chain </center>
             <div class="img-box b-1">
               <img src="../../products/keychain.jpg" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
+          <br><br>
+
+          <center style="background-color: black; color: white"> Frame </center>
             <div class="img-box b-1">
               <img src="../../products/frame.jfif" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-          </div>
+          <br><br>
 
-          <div class="column">
+          <center style="background-color: black; color: white"> Back Cover </center>
             <div class="img-box b-1">
               <img src="../../products/cover.jpg" alt="">
               <div class="info-box">
                 <a href="clientinfo.php" class="info">
                 </a>
               </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/keychain.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/keychain.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-             <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-              <div class="cart-box">
-                <a href="clientcart.php" class="cart">
-                </a>
-              </div>
             </div>
           </div>
+          <br><br>
+          
+          
+            </center>
         </div>
       </div>
       
     </div>
-
+  <script>
+    function info(){
+      document.location.href="clientinfo.php";
+    }
+  </script>
   </section>
 
   <!-- end about section -->

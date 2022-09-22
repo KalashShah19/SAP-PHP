@@ -52,6 +52,8 @@
     </header>
 
 <script>
+  var path = window.location.pathname;
+    var page = path.split("/").pop();
 
     if(page=="clienthome.php") {
         document.getElementById("home").className = "nav-item active";
