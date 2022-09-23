@@ -65,9 +65,8 @@ session_start();
         </div>
         <div class="">
           <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-11 mx-auto">
                 <div class="contact_form-container"> 
-                  <center>
                       <table>
                         <tr>
                           <th> First Name </th>
@@ -127,7 +126,6 @@ session_start();
                       }
                     ?>
                       </table>
-                  </center>
                 </div>
               </div>
             </div>

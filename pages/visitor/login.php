@@ -134,7 +134,6 @@
         $uid=$row['uid'];
         $str=$str.$email.",";
         $data[$row['email']]=$row['uid'];
-
       }
     }
     ?>

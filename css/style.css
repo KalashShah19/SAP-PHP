@@ -63,7 +63,7 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   z-index: 1;
-  background-image: url(../../images/heading-img.png);
+  background-image: url(images/heading-img.png);
   background-repeat: no-repeat;
 }
 
@@ -71,7 +71,7 @@ body {
 .hero_area {
   height: 136vh;
   position: relative;
-  background-image: url(../../images/hero-bg.png);
+  background-image: url(images/hero-bg.png);
   background-size: cover;
 }
 
@@ -146,7 +146,7 @@ a:focus {
 }
 
 .custom_nav-container .nav_search-btn {
-  background-image: url(../../images/search-icon.png);
+  background-image: url(../images/search-icon.png);
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center 5px;
@@ -196,7 +196,7 @@ a:focus {
 }
 
 .custom_nav-container .navbar-toggler .navbar-toggler-icon {
-  background-image: url(../../images/menu.png);
+  background-image: url(../..//images/menu.png);
   background-size: 45px;
 }
 
@@ -353,11 +353,11 @@ a:focus {
 }
 
 .slider_section .carousel_btn-container .carousel-control-next {
-  background-image: url(../../images/next.png);
+  background-image: url(../images/next.png);
 }
 
 .slider_section .carousel_btn-container .carousel-control-next:hover {
-  background-image: url(../../images/next-blue.png);
+  background-image: url(../images/next-blue.png);
 }
 
 .about_section .box {
@@ -540,7 +540,7 @@ a:focus {
 
 
 .portfolio_section .portfolio_container .img-box .btn-box .btn-1 {
-  background-image: url(../../images/star.jpg);
+  background-image: url(../images/star.jpg);
 }
 
 .portfolio_section .portfolio_container .img-box .info-box .info {
@@ -549,7 +549,7 @@ a:focus {
 
 
 .portfolio_section .portfolio_container .img-box .cart-box .cart {
-  background-image: url(../../products/cart.jpg);
+  background-image: url(../products/cart.jpg);
   background-size: cover;
 }
 
@@ -751,7 +751,7 @@ a:focus {
 
 /* contact section */
 .contact_section {
-  background-image: url(../../images/contact-bg.png);
+  background-image: url(../images/contact-bg.png);
   background-repeat: no-repeat;
   background-position: left bottom;
   padding-bottom: 250px;
@@ -903,7 +903,7 @@ a:focus {
   /* Create four equal columns that sits next to each other */
   .column {
 	flex: 25%;
-	max-width: 50%;
+	max-width: 25%;
 	padding: 0 4px;
   }
   

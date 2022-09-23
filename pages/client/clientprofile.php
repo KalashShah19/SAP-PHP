@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,37 +61,43 @@
                 <div>
                   <!-- <p> Profile Picture : </p>
                   <img src="../../images/kalash.jpg" width="100px"> <br> <br> <br> -->
+                  <?php 
+                    include '../../conn.php';
+                    $sql="select * from users where uid=$_SESSION['uid']";
+                    $results=mysqli_query($db, $sql);
+                    while($data = mysqli_fetch_array($results)) {
+                  ?>
                   <div>
                     <label> First Name : </label>
-                    <input type="text" name="fname" value="Kalash">
+                    <input type="text" name="fname" value="<?php echo $data['fname'];?>">
                   </div>
                   <div>
                     <label> Middle Name : </label>
-                    <input type="text" name="mname" value="Abhay">
+                    <input type="text" name="mname" value="<?php echo $data['mname'];?>">
                   </div>
                   <div>
                     <label> Last Name : </label>
-                    <input type="text" name="lname" value="Shah">
+                    <input type="text" name="lname" value="<?php echo $data['lname'];?>">
                   </div>
                   <div>
                     <label> User Name : </label>
-                    <input type="text" name="user" value="kalash19">
+                    <input type="text" name="user" value="<?php echo $data['username'];?>">
                   </div>
                   <div>
                     <label> Password : </label>
-                    <input type="text" name="pass" value="1234">
+                    <input type="text" name="pass" value="">
                   </div>
                   <div>
                     <label> Phone Number : </label>
-                    <input type="text" name="num" value="9874456321">
+                    <input type="text" name="num" value="<?php echo $data['contact'];?>">
                   </div>
                   <div>
                     <label> Email : </label>
-                    <input type="email"  name="email" value="kalash@gmail.com">
+                    <input type="email"  name="email" value="<?php echo $data['email'];?>">
                   </div>
                   <div>
                     <label> Address : </label>
-                    <input type="text"  name="add" value="101, B Wing, Gokuldham Society, Powder Gali, Mumbai">
+                    <input type="text"  name="add" value="<?php echo $data['address'];?>">
                   </div>
                   <div class=" d-flex justify-content-center ">
                     <!-- <button style="border: 2px solid white;" type="submit">
@@ -103,6 +110,7 @@
                 </div>
               </div>
             </form>
+            <?php } ?>
           </div>
         </div>
       </div>
