@@ -62,8 +62,9 @@
                   <!-- <p> Profile Picture : </p>
                   <img src="../../images/kalash.jpg" width="100px"> <br> <br> <br> -->
                   <?php 
+                    $id=$_SESSION['uid'];
                     include '../../conn.php';
-                    $sql="select * from users where uid=$_SESSION['uid']";
+                    $sql="select * from users where uid=$id;";
                     $results=mysqli_query($db, $sql);
                     while($data = mysqli_fetch_array($results)) {
                   ?>
@@ -79,6 +80,30 @@
                     <label> Last Name : </label>
                     <input type="text" name="lname" value="<?php echo $data['lname'];?>">
                   </div>
+                  <label> Gender : </label>
+                    <table>
+                      <tr>
+                        <td>
+                          <input type="radio" id="male" name="gender" value="male" <?php if($data['gender']=="male") { echo "checked";}?>> 
+                        </td>
+                        <td>
+                          <label for="male"> Male </label>
+                        </td>
+                        <td>
+                          <input type="radio" id="female" name="gender" value="female" <?php if($data['gender']=="female") { echo "checked";}?>>
+                        </td>
+                        <td>
+                          <label for="female"> Female </label>
+                        </td>
+                        <td>
+                          <td>
+                            <input type="radio" id="other" name="gender" value="other" <?php if($data['gender']=="other") { echo "checked";}?>>
+                          </td>
+                          <td>
+                          <label for="other"> Other </label>
+                        </td>
+                      </tr>
+                    </table>
                   <div>
                     <label> User Name : </label>
                     <input type="text" name="user" value="<?php echo $data['username'];?>">
@@ -89,7 +114,7 @@
                   </div>
                   <div>
                     <label> Phone Number : </label>
-                    <input type="text" name="num" value="<?php echo $data['contact'];?>">
+                    <input type="text" name="contact" value="<?php echo $data['contact'];?>">
                   </div>
                   <div>
                     <label> Email : </label>
@@ -97,13 +122,13 @@
                   </div>
                   <div>
                     <label> Address : </label>
-                    <input type="text"  name="add" value="<?php echo $data['address'];?>">
+                    <input type="text"  name="address" value="<?php echo $data['address'];?>">
                   </div>
                   <div class=" d-flex justify-content-center ">
                     <!-- <button style="border: 2px solid white;" type="submit">
                       Upload Profile Photo
                     </button> -->
-                    <button style="border: 2px solid white;" type="submit">
+                    <button style="border: 2px solid white;" name="submit" type="submit">
                       Save
                     </button>
                   </div>
@@ -126,11 +151,24 @@
     $mname=$_POST['mname'];
     $lname=$_POST['lname'];
     $user=$_POST['user'];
-    $pass=$_POST['pass'];
-    $cpass=$_POST['cpass'];
-    $num=$_POST['num'];
     $email=$_POST['email'];
-    $add=$_POST['add'];
+    $address=$_POST['address'];
+    $contact=$_POST['contact'];
+    $gender=$_POST['gender'];
+
+    $pass=0;
+    
+    if(isset($_POST['pass'])){
+      $pass=1;
+      $password=md5($_POST['pass']);
+      $sql="update users set password='$password' where uid=$id";
+      mysqli_query($db, $sql);
+    }
+    
+    $sql="UPDATE `users` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`username`='$user',`contact`='$contact',gender='$gender',`address`='$address',`email`='$email'  WHERE uid=$id;";
+    mysqli_query($db, $sql);
+    echo '<script> alert("Your Profile has been Updated Successfully.");</script>';
+    echo '<script> document.location.href="clientprofile.php";</script>';
   }
   ?>
 

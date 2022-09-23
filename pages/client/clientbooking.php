@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  $db = mysqli_connect('localhost', 'root', 'root', 'sap');
+  include '../../conn.php';
   $results = mysqli_query($db, "SELECT SrvEveName,SrvEveCharges FROM tbl_service_events;");
 ?>
 <!DOCTYPE html>
