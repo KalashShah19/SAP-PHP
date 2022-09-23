@@ -89,9 +89,10 @@
   <!-- Backend validation -->
   <?php
     include '../../conn.php';
+    
     if(isset($_POST['submit'])) {
       $user=$_POST['user'];
-      $pass=$_POST['pass'];
+      $pass=md5($_POST['pass']);
       $login=0;
       
       $results = mysqli_query($db, "SELECT * FROM users;");

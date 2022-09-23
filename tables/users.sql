@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 06:55 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Sep 23, 2022 at 03:28 PM
+-- Server version: 5.7.38-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -46,13 +45,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
-(1, 'Kalash', 'Abhay', 'Shah', 'k', 'k', 9426921383, 'male', 'Navsari', 'owner', 'kalashshahnvs@gmail.com'),
-(6, 'jainam', 'Abhay', 'Shah', 'j', 'j', 9874456321, 'male', 'navsari', 'client', 'jainamshah@gmail.com'),
-(18, 'Kashish', 'jigar', 'Sukhadia', 'ks', 'k', 9632587410, 'female', 'nvs', 'admin', 'kashishsukhadia8@gmail.com'),
-(19, 'aamena', 'zakir', 'shaikh', 'a', 'a', 8520147963, 'female', 'chikhli', 'admin', 'aamushaikh1010@gmail.com'),
-(20, 'nidhi', 'jay', 'patel', 'p', 'p', 7410258963, 'female', 'bardoli', 'client', 'nidhi@gmail.com'),
-(21, 'nishtha', 'satish', 'tandel', 'ni', 'n', 9632587410, 'female', 'nvs', 'client', 'tandelnishtha07@gmail.com'),
-(22, 'Amit', 'b', 'patel', 'am', 'a', 9874563210, 'male', 'vyara', 'admin', 'am@gmail.com');
+(1, 'Kalash', 'Abhay', 'Shah', 'k', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', '20bmiit040@gmail.com'),
+(25, 'pooja', 'p', 'lname', 'poo', 'f3ede926587776a8cd79fb2afe4e07b4', 9874563210, 'female', 'vyara', 'client', 'poo@gmail.com'),
+(26, 'aamena', 'zakir', 'shaikh', 'aa', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -73,9 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-COMMIT;
-
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

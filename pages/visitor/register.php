@@ -159,9 +159,10 @@
       $mname=$_POST['mname'];
       $lname=$_POST['lname'];
       $user=$_POST['user'];
-      $pass=$_POST['pass'];
-      $cpass=$_POST['cpass'];
+      $pass=md5($_POST['pass']);
+      // $cpass=$_POST['cpass'];
       $num=$_POST['num'];
+      $gender=$_POST['gender'];
       $email=$_POST['email'];
       $add=$_POST['add'];
       $type="client";
@@ -176,12 +177,12 @@
           }
         }   
       }
+      include '../../conn.php';
 
-      $db = mysqli_connect('localhost', 'root', '', 'sap');
-
-      $sql = "INSERT INTO users (fname,mname,lname,username,password,contact,address,usertype,email) VALUES ('$fname', '$mname', '$lname', '$user', '$pass', $num, '$add', '$type', '$email');";
+      $sql = "INSERT INTO `users`(`fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$mname', '$lname', '$user', '$pass', '$num', '$gender', '$add', '$type', '$email');";
       mysqli_query($db,$sql);
       echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';
+      echo "<script type='text/javascript'>document.location.href='login.php';</script>";
     }
     ?>
 
