@@ -161,10 +161,10 @@ session_start();
             <td><label> User Name : </label></td>
             <td><input type="text" name="username" value="<?php echo $data['username'];?>"></td>
         </tr>
-          <tr>
+          <!-- <tr>
             <td><label> Password : </label></td>
             <td><input type="text" name="password" value="<?php echo $data['password'];?>"></td>
-        </tr>
+        </tr> -->
           <tr>
             <td><label> Phone Number : </label></td>
             <td><input type="number" name="contact" value="<?php echo $data['contact'];?>"></td>
