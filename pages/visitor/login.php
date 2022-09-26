@@ -132,9 +132,11 @@
     if(isset($_POST['forgot'])){
       $str="";
       $row=array();
-      $sql="select uid,email from users;";
+      $sql="select uid,email,usertype from users;";
       $results = mysqli_query($db,$sql);
       while ($row = mysqli_fetch_array($results)) {
+        $email=$row['email'];
+        $usertype=$row['usertype'];
         $uid=$row['uid'];
         $str=$str.$email.",";
         $data[$row['email']]=$row['uid'];
@@ -174,6 +176,7 @@
       else {
         var inp=prompt("OTP has been sent to your Email, kindly check your spam section and enter the OTP below : ");
         if(inp==OTP) {
+          
           document.location.href='../client/clienthome.php';
           alert("Correct!!");
         }
