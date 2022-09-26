@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 23, 2022 at 05:14 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Sep 26, 2022 at 02:16 PM
+-- Server version: 5.7.38-0ubuntu0.18.04.1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -46,7 +45,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
-(1, 'Kalash', 'Abhay', 'Shah', 'k', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', 'kalashshahnvs@gmail.com'),
+(1, 'Kalash', 'Abhay', 'Shah', 'k', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', '20bmiit040@gmail.com'),
+(6, 'Jainam', 'A', 'Shah', 'j', '363b122c528f54df4a0446b6bab05515', 9632587412, 'male', 'nvs', 'client', 'jainamshahnvs@gmail.com'),
 (19, 'aamena', 'zakir', 'shaikh', 'aa', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com'),
 (27, 'varshal', 'jignesh', 'patel', 'v', '9e3669d19b675bd57058fd4664205d2a', 9874563210, 'male', 'kumbhar faliya', 'client', 'v@gmail.com'),
 (28, 'nishtha', 'satish', 'tandel', 'ni', 'e6c151d449e1db05b1ffb5ad5ec656cf', 7410258963, 'female', 'navsari', 'client', 'ni@gmail.com'),
@@ -72,8 +72,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
