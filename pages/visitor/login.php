@@ -26,7 +26,14 @@
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
 
-  <script src="https://smtpjs.com/v3/smtp.js"></script>  
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+      </script>
+      <script type="text/javascript">
+         (function(){
+            emailjs.init("cyZCTdqrK-Ga1FwTq");
+         })();
+      </script>
 </head>
 
 <body class="sub_page">
@@ -89,10 +96,9 @@
   <!-- Backend validation -->
   <?php
     include '../../conn.php';
-    
     if(isset($_POST['submit'])) {
       $user=$_POST['user'];
-      $pass=md5($_POST['pass']);
+      $pass=$_POST['pass'];
       $login=0;
       
       $results = mysqli_query($db, "SELECT * FROM users;");
@@ -125,15 +131,24 @@
 
     if(isset($_POST['forgot'])){
       $str="";
+      $json=array("email" => "",
+      "uid" => "",
+      "usertype" => "",
+      "fname" => "");
       $row=array();
-      $sql="select uid,email,usertype from users;";
+      $sql="select fname,uid,email,usertype from users;";
       $results = mysqli_query($db,$sql);
       while ($row = mysqli_fetch_array($results)) {
         $email=$row['email'];
         $usertype=$row['usertype'];
         $uid=$row['uid'];
+        $fname=$row['fname'];
         $str=$str.$email.",";
-        $data[$row['email']]=$row['uid'];
+        $json=array_push( $json, array(
+          "email" => $email,
+          "uid" => $uid,
+          "usertype" => $usertype,
+          "fname" => $fname));
       }
     }
     ?>
@@ -142,10 +157,9 @@
     function forgotpass() {
       var email="";
       var mails;
-      var phpmail="";
       var i=0;
       var flag=0;
-      var arr = <?php echo json_encode($data);?>;
+      var arr = <?php echo json_encode($json);?>;
       var uid=0;
       email=prompt("Enter Your Email : ");
       str="<?php echo $str;?>";
@@ -157,15 +171,16 @@
           for (let i = 0; i < 4; i++ ) {
               OTP += digits[Math.floor(Math.random() * 10)];
           }
-          Email.send({
-          SecureToken : "68b33b4e-ffdd-41f7-98ba-2a38aee89aa9",
-          To : email,
-          From : "snapdragon7gamer@gmail.com",
-          Subject : "SAP OTP",
-          Body : "Your SAP OTP is " + OTP
-          }).then(
-            flag=1
-          );
+          // Send Mail
+          var para = { otp : OTP, email: email };
+          emailjs.send("service_q9n1gle","template_gzlkddb",para);
+          <?php 
+            $mail='<script> document.write(email); </script>';
+            if($json['email']==$mail){
+              echo "done";
+            }
+          ?>
+          flag=1;
           break;
         }
       }
@@ -176,8 +191,9 @@
       else {
         var inp=prompt("OTP has been sent to your Email, kindly check your spam section and enter the OTP below : ");
         if(inp==OTP) {
+          
           document.location.href='../client/clienthome.php';
-          alert("Coreect!!");
+          alert("Correct!!");
         }
         else {
           alert("Wrong OTP.");
