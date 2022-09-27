@@ -131,15 +131,24 @@
 
     if(isset($_POST['forgot'])){
       $str="";
+      $json=array("email" => "",
+      "uid" => "",
+      "usertype" => "",
+      "fname" => "");
       $row=array();
-      $sql="select uid,email,usertype from users;";
+      $sql="select fname,uid,email,usertype from users;";
       $results = mysqli_query($db,$sql);
       while ($row = mysqli_fetch_array($results)) {
         $email=$row['email'];
         $usertype=$row['usertype'];
         $uid=$row['uid'];
+        $fname=$row['fname'];
         $str=$str.$email.",";
-        $data[$row['email']]=$row['uid'];
+        $json=array_push( $json, array(
+          "email" => $email,
+          "uid" => $uid,
+          "usertype" => $usertype,
+          "fname" => $fname));
       }
     }
     ?>
@@ -150,7 +159,7 @@
       var mails;
       var i=0;
       var flag=0;
-      var arr = <?php echo json_encode($data);?>;
+      var arr = <?php echo json_encode($json);?>;
       var uid=0;
       email=prompt("Enter Your Email : ");
       str="<?php echo $str;?>";
@@ -165,6 +174,12 @@
           // Send Mail
           var para = { otp : OTP, email: email };
           emailjs.send("service_q9n1gle","template_gzlkddb",para);
+          <?php 
+            $mail='<script> document.write(email); </script>';
+            if($json['email']==$mail){
+              echo "done";
+            }
+          ?>
           flag=1;
           break;
         }
