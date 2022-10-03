@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 06:54 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost
+-- Generation Time: Oct 03, 2022 at 08:40 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -50,23 +50,23 @@ INSERT INTO `booking` (`bid`, `event`, `personalized`, `uid`, `start`, `end`, `b
 (2, 'meeting', '', 6, '2022-09-30', '2023-11-15', ' daman', 0, '', 'approved', 13000),
 (3, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'approved', 0),
 (4, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'approved', 0),
-(5, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
+(5, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'pending', 0),
 (6, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
-(7, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
-(8, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'approved', 0),
-(9, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'approved', 0),
-(10, 'portfolio shoot', '', 6, '2022-09-19', '2022-09-19', ' Bardoli', 0, '', 'approved', 0),
-(11, 'party', '', 6, '2022-09-20', '2022-09-20', ' uka tarsadiya ', 0, '', 'approved', 0),
-(12, 'competetion', '', 6, '2022-09-06', '2022-09-14', ' nvs', 0, '', 'approved', 0),
-(13, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'approved', 0),
-(14, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'approved', 0),
-(15, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'rejected', 31000),
-(16, 'wedding', '', 6, '2022-09-14', '2022-09-01', ' nvs', 0, '', 'rejected', 88500),
-(17, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'rejected', 31000),
-(18, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'rejected', 31000),
+(7, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'pending', 0),
+(8, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'pending', 0),
+(9, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'pending', 0),
+(10, 'portfolio shoot', '', 6, '2022-09-19', '2022-09-19', ' Bardoli', 0, '', 'pending', 0),
+(11, 'party', '', 6, '2022-09-20', '2022-09-20', ' uka tarsadiya ', 0, '', 'pending', 0),
+(12, 'competetion', '', 6, '2022-09-06', '2022-09-14', ' nvs', 0, '', 'pending', 0),
+(13, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 0),
+(14, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 0),
+(15, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'pending', 31000),
+(16, 'wedding', '', 6, '2022-09-14', '2022-09-01', ' nvs', 0, '', 'pending', 88500),
+(17, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'pending', 31000),
+(18, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'pending', 31000),
 (19, 'wedding', '', 6, '2022-09-13', '2022-09-01', ' asg', 0, '', 'pending', 57500),
 (20, 'inogration/opening', '', 6, '2023-09-27', '2022-09-15', ' fdj', 0, '', 'pending', 8000),
-(21, 'inogration/opening', '', 6, '2022-09-21', '2022-09-21', ' dahz', 0, '', 'approved', 80500);
+(21, 'inogration/opening', '', 6, '2022-09-21', '2022-09-21', ' dahz', 0, '', 'pending', 80500);
 
 -- --------------------------------------------------------
 
@@ -107,6 +107,29 @@ INSERT INTO `bookingdetails` (`bdid`, `bid`, `SrvEveID`, `stid`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartdetails`
+--
+
+CREATE TABLE `cartdetails` (
+  `cdid` int(11) NOT NULL,
+  `cartid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contact`
 --
 
@@ -134,6 +157,18 @@ INSERT INTO `contact` (`cid`, `cfname`, `cmname`, `clname`, `cemail`, `cmsg`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cover`
+--
+
+CREATE TABLE `cover` (
+  `coid` int(11) NOT NULL,
+  `coname` varchar(50) NOT NULL,
+  `copath` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `leaves`
 --
 
@@ -152,29 +187,71 @@ CREATE TABLE `leaves` (
 
 INSERT INTO `leaves` (`lid`, `uid`, `startdate`, `enddate`, `reason`, `leavestatus`) VALUES
 (1, 22, '2022-09-12', '2022-09-12', 'sick', 'approved'),
-(2, 22, '2022-09-12', '2022-09-12', 'sick', 'pending');
+(2, 22, '2022-09-12', '2022-09-12', 'sick', 'approved');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Table structure for table `media`
 --
 
-CREATE TABLE `staff` (
-  `stid` int(11) NOT NULL,
+CREATE TABLE `media` (
+  `mid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
-  `salary` float NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `joindate` date NOT NULL,
-  `leavedate` date DEFAULT NULL
+  `math` varchar(100) NOT NULL,
+  `mediatype` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `staff`
+-- Table structure for table `orders`
 --
 
-INSERT INTO `staff` (`stid`, `uid`, `salary`, `role`, `joindate`, `leavedate`) VALUES
-(1, 22, 15000, 'Manager', '2000-04-01', '0000-00-00');
+CREATE TABLE `orders` (
+  `oid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `deliverystatus` varchar(20) NOT NULL,
+  `orderpayment` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `pid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `size` varchar(20) NOT NULL,
+  `price` float NOT NULL,
+  `pname` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `rid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `review` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `selected`
+--
+
+CREATE TABLE `selected` (
+  `sid` int(11) NOT NULL,
+  `mid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -226,13 +303,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
-(1, 'Kalash', 'Abhay', 'Shah', 'k', 'k', 9426921383, 'male', 'Navsari', 'owner', 'kalashshahnvs@gmail.com'),
-(6, 'jainam', 'Abhay', 'Shah', 'j', 'j', 9874456321, 'male', 'navsari', 'client', 'jainamshah@gmail.com'),
-(18, 'Kashish', 'jigar', 'Sukhadia', 'ks', 'k', 9632587410, 'female', 'nvs', 'admin', 'kashishsukhadia8@gmail.com'),
-(19, 'aamena', 'zakir', 'shaikh', 'a', 'a', 8520147963, 'female', 'chikhli', 'admin', 'aamushaikh1010@gmail.com'),
-(20, 'nidhi', 'jay', 'patel', 'p', 'p', 7410258963, 'female', 'bardoli', 'client', 'nidhi@gmail.com'),
-(21, 'nishtha', 'satish', 'tandel', 'ni', 'n', 9632587410, 'female', 'nvs', 'client', 'tandelnishtha07@gmail.com'),
-(22, 'Amit', 'b', 'patel', 'am', 'a', 9874563210, 'male', 'vyara', 'admin', 'am@gmail.com');
+(1, 'Kalash', 'Abhay', 'Shah', 'k', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', 'kalashshahnvs@gmail.com'),
+(6, 'Jainam', 'A', 'Shah', 'j', '363b122c528f54df4a0446b6bab05515', 1234567890, 'male', 'nvs', 'client', 'j@g.c'),
+(19, 'aamena', 'zakir', 'shaikh', 'aa', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com'),
+(22, 'AMIT', 'a', 'a', 'a', '0cc175b9c0f1b6a831c399e269772661', 1234567890, 'male', 'nvs', 'admin', 'a@a.c'),
+(27, 'varshal', 'jignesh', 'patel', 'v', '9e3669d19b675bd57058fd4664205d2a', 9874563210, 'male', 'kumbhar faliya', 'client', '20bmiit033@gmail.com'),
+(28, 'nishtha', 'satish', 'tandel', 'ni', 'e6c151d449e1db05b1ffb5ad5ec656cf', 7410258963, 'female', 'navsari', 'client', 'ni@gmail.com'),
+(29, 'prince', 'v', 'patel', 'pr', '64e1e1cbe1ca8e88ef3a838a3e7b57d6', 8520147963, 'male', 'bilimora', 'client', 'pr@g.com'),
+(32, 'Ram', 'Dashrat', 'Bhagwanji', 'ram', '4641999a7679fcaef2df0e26d11e3c72', 9090090900, 'male', 'Ayodhya', 'client', 'ram12@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -251,16 +329,52 @@ ALTER TABLE `bookingdetails`
   ADD PRIMARY KEY (`bdid`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartid`);
+
+--
+-- Indexes for table `cartdetails`
+--
+ALTER TABLE `cartdetails`
+  ADD PRIMARY KEY (`cdid`);
+
+--
+-- Indexes for table `cover`
+--
+ALTER TABLE `cover`
+  ADD PRIMARY KEY (`coid`);
+
+--
 -- Indexes for table `leaves`
 --
 ALTER TABLE `leaves`
   ADD PRIMARY KEY (`lid`);
 
 --
--- Indexes for table `staff`
+-- Indexes for table `media`
 --
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`stid`);
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`mid`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`oid`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`pid`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`rid`);
 
 --
 -- Indexes for table `tbl_service_events`
@@ -292,16 +406,52 @@ ALTER TABLE `bookingdetails`
   MODIFY `bdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cartdetails`
+--
+ALTER TABLE `cartdetails`
+  MODIFY `cdid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cover`
+--
+ALTER TABLE `cover`
+  MODIFY `coid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT for table `media`
 --
-ALTER TABLE `staff`
-  MODIFY `stid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `media`
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_service_events`
@@ -313,7 +463,7 @@ ALTER TABLE `tbl_service_events`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
