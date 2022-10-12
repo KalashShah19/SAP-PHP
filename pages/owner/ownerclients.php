@@ -33,6 +33,9 @@ session_start();
   <link href="../../css/responsive.css" rel="stylesheet" />
 
   <style>
+    html{
+      scroll-behavior: smooth;
+    }
     table, tr, td, th {
       border: 1px solid black;
       text-align: center;
@@ -67,23 +70,21 @@ session_start();
           <div class="row">
             <div class="col-md-11 mx-auto">
                 <div class="contact_form-container"> 
+                  <center>
                       <table>
                         <tr>
                           <th> First Name </th>
-                          <th> Middle Name </th>
                           <th> Last Name </th>
-                          <th> User Name </th>
-                          <th> Password </th>
                           <th> Phone Number </th>
                           <th> Gender </th>
                           <th> Email </th>
                           <th> Address </th>
                           <th> User Type </th>
-                          <th> Actions </th>
+                          <th colspan="2"> Actions </th>
                         </tr>
                     <?php 
                       include '../../conn.php';
-                      $sql="select * from users;";
+                      $sql="select * from users where uid!=1;;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
                         <tr>
@@ -91,16 +92,7 @@ session_start();
                             <?php echo $data['fname']; ?>
                           </td>
                           <td>
-                            <?php echo $data['mname']; ?>
-                          </td>
-                          <td>
                             <?php echo $data['lname']; ?>
-                          </td>
-                          <td>
-                            <?php echo $data['username']; ?>
-                          </td>
-                          <td>
-                            <?php echo $data['password']; ?>
                           </td>
                           <td>
                             <?php echo $data['contact']; ?>
@@ -118,13 +110,15 @@ session_start();
                               <?php echo $data['usertype']; ?>
                           </td>
                           <td>
-                            <a href="ownerclients.php?edit=<?php echo $data['uid'];?>#edit"> Edit </a>
-                            <a href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Delete </a>
+                            <a style="background-color:lime;color:black"  href="ownerclients.php?edit=<?php echo $data['uid'];?>#edit"> Edit </a>
+                          </td>
+                          <td>
+                            <a style="background-color:red;color:black" href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Delete </a>
                           </td>
                         </tr> 
                         <?php
                       }
-                    ?>
+                    ?> </center>
                       </table>
                 </div>
               </div>
@@ -150,22 +144,10 @@ session_start();
             <td><input type="text" name="fname" value="<?php echo $data['fname'];?>"></td>
           </tr>
           <tr>
-            <td><label> Middle Name : </label></td>
-            <td><input type="text" name="mname" value="<?php echo $data['mname'];?>"></td>
-        </tr>
-          <tr>
             <td><label> Last Name : </label></td>
             <td><input type="text" name="lname" value="<?php echo $data['lname'];?>"></td>
         </tr>
-          <tr>
-            <td><label> User Name : </label></td>
-            <td><input type="text" name="username" value="<?php echo $data['username'];?>"></td>
-        </tr>
-          <!-- <tr>
-            <td><label> Password : </label></td>
-            <td><input type="text" name="password" value="<?php echo $data['password'];?>"></td>
-        </tr> -->
-          <tr>
+        <tr>
             <td><label> Phone Number : </label></td>
             <td><input type="number" name="contact" value="<?php echo $data['contact'];?>"></td>
         </tr>
@@ -186,7 +168,10 @@ session_start();
         </tr>
         <tr>
             <td><label> user Type : </label></td>
-            <td><input type="text"  name="usertype" value="<?php echo $data['usertype'];?>"></td>
+            <td> <label for="client"> Client </label> 
+              <input type="radio"  name="usertype" id="client" value="client" <?php $user=$data['usertype']; if($user=="client"){echo "checked";} ?>>
+            <label for="admin"> Admin </label>
+              <input type="radio"  name="usertype" id="admin" value="admin" <?php $user=$data['usertype']; if($user=="admin"){echo "checked";} ?>>  </td>
         </tr>
         
           <tr> 
@@ -200,16 +185,13 @@ session_start();
         <?php
           if(isset($_POST['update'])) {
               $fname=$_POST['fname'];
-              $mname=$_POST['mname'];
               $lname=$_POST['lname'];
-              $username=$_POST['username'];
-              $password=$_POST['password'];
               $contact=$_POST['contact'];
               $gender=$_POST['gender'];
               $email=$_POST['email'];
               $address=$_POST['address'];
               $usertype=$_POST['usertype'];
-              $sql="UPDATE `users` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`username`='$username',`password`='$password',`contact`='$contact',gender='$gender',`address`='$address',`email`='$email', usertype='$usertype'  WHERE uid=$uid;";
+              $sql="UPDATE `users` SET `fname`='$fname',`lname`='$lname',`contact`='$contact',gender='$gender',`address`='$address',`email`='$email', usertype='$usertype'  WHERE uid=$uid;";
               mysqli_query($db, $sql);
               echo '<script> alert("Record Updated Successfully."); </script>';
               echo '<script> document.location.href="ownerclients.php"; </script>';

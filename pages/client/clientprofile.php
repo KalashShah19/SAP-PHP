@@ -73,10 +73,6 @@
                     <input type="text" name="fname" value="<?php echo $data['fname'];?>">
                   </div>
                   <div>
-                    <label> Middle Name : </label>
-                    <input type="text" name="mname" value="<?php echo $data['mname'];?>">
-                  </div>
-                  <div>
                     <label> Last Name : </label>
                     <input type="text" name="lname" value="<?php echo $data['lname'];?>">
                   </div>
@@ -105,14 +101,6 @@
                       </tr>
                     </table>
                   <div>
-                    <label> User Name : </label>
-                    <input type="text" name="user" value="<?php echo $data['username'];?>">
-                  </div>
-                  <div>
-                    <label> Password : </label>
-                    <input type="text" name="pass" value="">
-                  </div>
-                  <div>
                     <label> Phone Number : </label>
                     <input type="text" name="contact" value="<?php echo $data['contact'];?>">
                   </div>
@@ -131,6 +119,9 @@
                     <button style="border: 2px solid white;" name="submit" type="submit">
                       Save
                     </button>
+                    <button style="border: 2px solid white;" name="change" formaction="clientprofile.php#change">
+                      Change Password
+                    </button>
                   </div>
                 </div>
               </div>
@@ -148,28 +139,47 @@
   <?php
   if(isset($_POST['submit'])) {
     $fname=$_POST['fname'];
-    $mname=$_POST['mname'];
     $lname=$_POST['lname'];
-    $user=$_POST['user'];
     $email=$_POST['email'];
     $address=$_POST['address'];
     $contact=$_POST['contact'];
     $gender=$_POST['gender'];
-
     $pass=0;
     
-    if(isset($_POST['pass'])){
-      $pass=1;
-      $password=md5($_POST['pass']);
-      $sql="update users set password='$password' where uid=$id";
-      mysqli_query($db, $sql);
-    }
-    
-    $sql="UPDATE `users` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`username`='$user',`contact`='$contact',gender='$gender',`address`='$address',`email`='$email'  WHERE uid=$id;";
+    $sql="UPDATE `users` SET `fname`='$fname',lname`='$lname',contact`='$contact',gender='$gender',`address`='$address',`email`='$email'  WHERE uid=$id;";
     mysqli_query($db, $sql);
     echo '<script> alert("Your Profile has been Updated Successfully.");</script>';
     echo '<script> document.location.href="clientprofile.php";</script>';
   }
+
+  if(isset($_POST['change'])){ ?>
+    <center>
+      <h2> Change Password </h2> <br>
+      <form method="POST" id="change"> 
+        <label for="new"> New Password </label>
+        <input type="password" id="new" name="new"> <br>
+        <label for="confirm"> Confirm Password </label> 
+        <input type="password" id="confirm" name="confirm">  <br>
+        <button name="save" type="submit">
+          Save
+        </button>
+      </form>
+      <br>
+    </center>
+  <?php } ?>
+
+  <?php
+    if(isset($_POST['save'])){
+      if($_POST['new'] == $_POST['confirm']){
+        $password=md5($_POST['new']);
+        $sql="update users set password='$password' where uid=$id";
+        mysqli_query($db, $sql);
+        echo "<script> alert('Your Password has been Chnaged Successfully!'); </script>";
+      }
+      else {
+        echo "<script> alert('Passwords do not Match!'); </script>";
+      }
+    }
   ?>
 
   <!-- info section -->

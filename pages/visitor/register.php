@@ -75,16 +75,8 @@
                     <input type="text" name="fname">
                   </div>
                   <div>
-                    <label> Middle Name : </label>
-                    <input type="text" name="mname">
-                  </div>
-                  <div>
                     <label> Last Name : </label>
                     <input type="text" name="lname">
-                  </div>
-                  <div>
-                    <label> User Name : </label>
-                    <input type="text" name="user">
                   </div>
                   <div>
                     <label> Password : </label>
@@ -156,9 +148,7 @@
    if(isset($_POST['submit']))
    {
       $fname=$_POST['fname'];
-      $mname=$_POST['mname'];
       $lname=$_POST['lname'];
-      $user=$_POST['user'];
       $pass=md5($_POST['pass']);
       // $cpass=$_POST['cpass'];
       $num=$_POST['num'];
@@ -168,22 +158,20 @@
       $type="client";
     
       $numberpattern="/^[0-9]{10}+$/";
-      if(isset($email))
-      {
         if(isset($num))
         {
           if(preg_match($numberpattern, $num)==0) {
             echo '<script> alert("Invalid Mobile Number !"); </script>';
+          }else {
+            include '../../conn.php';
+
+            $sql = "INSERT INTO `users`(`fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$lname', '$pass', '$num', '$gender', '$add', '$type', '$email');";
+            mysqli_query($db,$sql);
+            echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';
+            echo "<script type='text/javascript'>document.location.href='login.php';</script>";
           }
         }   
       }
-      include '../../conn.php';
-
-      $sql = "INSERT INTO `users`(`fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$mname', '$lname', '$user', '$pass', '$num', '$gender', '$add', '$type', '$email');";
-      mysqli_query($db,$sql);
-      echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';
-      echo "<script type='text/javascript'>document.location.href='login.php';</script>";
-    }
     ?>
 
    <!-- info section -->

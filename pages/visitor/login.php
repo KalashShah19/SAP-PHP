@@ -69,12 +69,12 @@
               <div class="contact_form-container">
                 <div>
                   <div>
-                    <label> User Name : </label>
-                    <input type="text" name="user">
+                    <label> Email : </label>
+                    <input type="email" name="email" required>
                   </div>
                   <div>
                     <label> Password : </label>
-                    <input type="password" name="pass">
+                    <input type="password" name="pass" required>
                   </div>
                   <div class=" d-flex justify-content-center ">
                      <button style="border: 2px solid white;" type="submit" name="submit">
@@ -97,16 +97,16 @@
   <?php
     include '../../conn.php';
     if(isset($_POST['submit'])) {
-      $user=$_POST['user'];
+      $mail=$_POST['email'];
       $pass=md5($_POST['pass']);
       $login=0;
       
       $results = mysqli_query($db, "SELECT * FROM users;");
       while ($row = mysqli_fetch_array($results)) {
-        $username=$row['username'];
+        $email=$row['email'];
         $password=$row['password'];
         $type=$row['usertype'];
-        if($username==$user && $password==$pass) {
+        if($email==$mail && $password==$pass) {
           $login=1;
           $_SESSION['fname']=$row['fname'];
           $_SESSION['uid']=$row['uid'];
@@ -131,15 +131,24 @@
 
     if(isset($_POST['forgot'])){
       $str="";
+      $json=array("email" => "",
+      "uid" => "",
+      "usertype" => "",
+      "fname" => "");
       $row=array();
-      $sql="select uid,email,usertype from users;";
+      $sql="select fname,uid,email,usertype from users;";
       $results = mysqli_query($db,$sql);
       while ($row = mysqli_fetch_array($results)) {
         $email=$row['email'];
         $usertype=$row['usertype'];
         $uid=$row['uid'];
+        $fname=$row['fname'];
         $str=$str.$email.",";
-        $data[$row['email']]=$row['uid'];
+        $json=array_push( $json, array(
+          "email" => $email,
+          "uid" => $uid,
+          "usertype" => $usertype,
+          "fname" => $fname));
       }
     }
     ?>
@@ -150,7 +159,7 @@
       var mails;
       var i=0;
       var flag=0;
-      var arr = <?php echo json_encode($data);?>;
+      var arr = <?php echo json_encode($json);?>;
       var uid=0;
       email=prompt("Enter Your Email : ");
       str="<?php echo $str;?>";
@@ -165,22 +174,29 @@
           // Send Mail
           var para = { otp : OTP, email: email };
           emailjs.send("service_q9n1gle","template_gzlkddb",para);
+          <?php 
+            $mail='<script> document.write(email); </script>';
+            if($json['email']==$mail){
+              echo "done";
+            }
+          ?>
           flag=1;
           break;
         }
       }
       
       if(flag==0){
-        alert("Enter Valid User's Email;"); 
+        alert("Enter Valid Email;"); 
       }
       else {
         var inp=prompt("OTP has been sent to your Email, kindly check your spam section and enter the OTP below : ");
         if(inp==OTP) {
-          alert("Correct!!");
+          
           document.location.href='../client/clienthome.php';
+          alert("Correct!!");
         }
         else {
-          alert(" Wrong OTP ");
+          alert("Wrong OTP.");
         }
       }
     }
