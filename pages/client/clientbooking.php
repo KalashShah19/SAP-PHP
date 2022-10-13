@@ -65,7 +65,7 @@
               <div class="contact_form-container">
                 <div> 
                   <label for="event"> <h5> Event Type </h5> </label> <br>
-                  <select name="event" id="event"> 
+                  <select name="event" id="event" required> 
                     <option> Select </option>
                     <option value="prewedding"> Pre Wedding </option>
                     <option value="wedding"> Wedding </option>
@@ -98,7 +98,7 @@
 
                   <div id="per" style="display:none;">
                     <label for="personalized"> <h5> Personalized Event Name </h5> </label>
-                    <input type="text" name="personalized" id="personalized"  class="book"> <br> <br>
+                    <input type="text" name="personalized" id="personalized" class="book"> <br> <br>
                   </div>
 
                   <!-- <label for="city"> <h5> City :- </h5> </label> <br>
@@ -3958,40 +3958,8 @@
                  <div>
                     <h4> Services :- </h4>
                     <table>
-                      <!-- <tr>
-                        <td>
-                          <label for="drone"> Drone </label>
-                        </td>
-                        <td>
-                          <input type="checkbox" id="drone" onclick="est(this);" name="services[]" value="drone">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label for="ledwall"> LED Wall </label>
-                        </td>
-                        <td>
-                          <input type="checkbox" id="ledwall" onclick="est(this);" name="services[]" value="LED wall">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label for="cinemato"> CinematoGrapher </label>
-                        </td>
-                        <td>
-                          <input type="checkbox" id="cinemato" name="services[]"  onclick="est(this);" value="cinematographer">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <label for="candid"> Candid PhotoGrapher </label>
-                        </td>
-                        <td>
-                          <input type="checkbox" id="candid" name="services[]"  onclick="est(this);" value="candid photographer">
-                        </td>
-                      </tr> -->
                       <?php
-                     include 'conn.php';
+                     include '../../conn.php';
                       $results = mysqli_query($db, "SELECT * FROM tbl_service_events;");
                       while ($row = mysqli_fetch_array($results)) {
                           $amt[$row['SrvEveID']]=$row['SrvEveCharges'];
@@ -4049,11 +4017,18 @@
     $baddress=$_POST['baddress'];
     $total=$_POST['total'];
     $instruction=$_POST['instruction'];
-    $SrvEveID=$_POST['services'];
+    $arr=$_POST['services'];
+    $SrvEveID="";
+    foreach($arr as $val){
+      $SrvEveID=$SrvEveID.",".$val;
+    }
+    echo "<script> alert($SrvEveID);</script>";
+    echo "<script> alert($bend);</script>";
+
 
     $sql="INSERT INTO `booking`(`event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) VALUES ('$event','$personalized','$uid','$bstart','$bend','$baddress','$total','$instruction','SrvEveID')";
     mysqli_query($db, $sql);
-    echo '<script> alert("Your Booking Request has Been Placed.");</script>';
+    // echo '<script> alert("Your Booking Request has Been Placed.");</script>';
   }
 
   
