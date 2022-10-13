@@ -15,15 +15,15 @@
 
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="../../css/responsive.css" rel="stylesheet" />
 </head>
 
 <body class="sub_page">
@@ -75,10 +75,10 @@
 
     <section class="contact_section layout_padding">
       <div class="bg-img1">
-        <img src="images/bg-img-1.png" alt="">
+        <img src="../../images/bg-img-1.png" alt="">
       </div>
       <div class="bg-img2">
-        <img src="images/bg-img-2.png" alt="">
+        <img src="../../images/bg-img-2.png" alt="">
       </div>
       <div class="container">
         <div class="heading_container">
@@ -89,6 +89,8 @@
             Refer the Order Details for Customized Products 
           </p>
         </div>
+        <center>
+          
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
@@ -98,7 +100,7 @@
                     <p> Order : Frame <p> 
                     <p> Size : Medium <p> 
                     <p> Color : Blue <p>  
-                    <img src="products/frame.jfif" width="150px">
+                    <img src="../../products/frame.jfif" width="150px">
                     <button type="submit"> Delivered </button>
                     <hr> <br>        
                     </form>
@@ -106,6 +108,7 @@
               </div>
             </div>
           </div>
+        </center>
         </div>
       </section>
   

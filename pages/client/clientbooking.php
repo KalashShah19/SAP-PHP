@@ -3991,11 +3991,12 @@
                         </td>
                       </tr> -->
                       <?php
-                      $db = mysqli_connect('localhost', 'root', '', 'sap');
-                      $results = mysqli_query($db, "SELECT SrvEveName,SrvEveCharges FROM tbl_service_events;");
+                     include 'conn.php';
+                      $results = mysqli_query($db, "SELECT * FROM tbl_service_events;");
                       while ($row = mysqli_fetch_array($results)) {
-                          $amt[$row['SrvEveName']]=$row['SrvEveCharges'];
-                          $serv=$row['SrvEveName'];  
+                          $amt[$row['SrvEveID']]=$row['SrvEveCharges'];
+                          $serv=$row['SrvEveName']; 
+                          $sid=$row['SrvEveID'];  
                           // echo '<script> alert("'.$serv.'");</script>';
                           ?>
                       <tr>
@@ -4003,7 +4004,7 @@
                           <label for="<?php echo $serv;?>"> <?php echo ucwords($serv); ?> </label>
                         </td>
                         <td>
-                          <input type="checkbox" id="<?php echo $serv;?>" onclick="est(this);" name="services[]" value="<?php echo $serv;?>">
+                          <input type="checkbox" id="<?php echo $serv;?>" onclick="est(this);" name="services[]" value="<?php echo $sid;?>">
                         </td>
                       </tr> 
                     <?php
@@ -4040,46 +4041,22 @@
   <?php
 
   if(isset($_POST['submit'])) {
-    $str="";
-    $uid=$_SESSION['uid'];
     $event=$_POST['event'];
     $personalized=$_POST['personalized'];
-    $baddress=$_POST['baddress'];
+    $uid=$_SESSION['uid'];
     $bstart=$_POST['start'];
     $bend=$_POST['end'];
+    $baddress=$_POST['baddress'];
     $total=$_POST['total'];
     $instruction=$_POST['instruction'];
-    $services=$_POST['services'];
+    $SrvEveID=$_POST['services'];
 
-    $sql="INSERT INTO booking(event,personalized, uid, start, end, baddress, bstatus, travelcharges, instructions, totalamount) VALUES ('$event', '$personalized', '$uid', '$bstart', '$bend', '$baddress', 'pending', '$travelcharges', '$instruction', '$total');";
+    $sql="INSERT INTO `booking`(`event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) VALUES ('$event','$personalized','$uid','$bstart','$bend','$baddress','$total','$instruction','SrvEveID')";
     mysqli_query($db, $sql);
-    $_SESSION['msg'] = "New Record Inserted";
-    $sql="select * from booking;";
-    $results = mysqli_query($db,$sql);
-    while ($data = mysqli_fetch_array($results)) {
-        if($data['uid']==$uid && $data['event']==$event && $data['totalamount']==$total){
-          $bid=$data['bid'];
-          break;
-        }
-      }
-      foreach($services as $val)
-      { 
-        $sql1="select * from tbl_service_events;";
-        $results = mysqli_query($db,$sql);
-        while ($data = mysqli_fetch_array($results)) {
-          if($data['SrvEveName']==$val){
-            $srvid=$data['SrvEveID'];
-          }
-        }
-        $sql="INSERT INTO bookingdetails(bid,SrvEveID) VALUES ('$bid','$srvid');";
-        mysqli_query($db, $sql);
-      }
     echo '<script> alert("Your Booking Request has Been Placed.");</script>';
   }
 
-  while ($row = mysqli_fetch_array($results)) {
-    $amt[$row['SrvEveName']]=$row['SrvEveCharges'];
-  }
+  
   // $values="<script> document.write(str); </>";
   // echo $values;
 
@@ -4091,7 +4068,6 @@
   var budget=0;
   var sum=0;
   var rs=0;
-  var str="services";
 
 
   var add = (a, b) => {
