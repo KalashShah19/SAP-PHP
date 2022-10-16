@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 06:54 PM
+-- Generation Time: Oct 16, 2022 at 11:34 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -38,71 +38,17 @@ CREATE TABLE `booking` (
   `travelcharges` float DEFAULT NULL,
   `instructions` varchar(200) DEFAULT NULL,
   `bstatus` varchar(20) DEFAULT NULL,
-  `totalamount` float DEFAULT NULL
+  `totalamount` float DEFAULT NULL,
+  `SrvEveID` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`bid`, `event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`) VALUES
-(1, 'birthday', '', 6, '2022-09-30', '2023-11-15', ' daman', 0, '', 'approved', 8000),
-(2, 'meeting', '', 6, '2022-09-30', '2023-11-15', ' daman', 0, '', 'approved', 13000),
-(3, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'approved', 0),
-(4, 'birthday', '', 6, '2022-09-27', '2022-09-27', ' navsari', 0, '', 'approved', 0),
-(5, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
-(6, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
-(7, 'sports', '', 6, '2022-09-30', '2022-09-30', ' Surat', 0, '', 'approved', 0),
-(8, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'approved', 0),
-(9, 'prewedding', '', 6, '2022-09-20', '2022-09-22', ' Goa', 0, '', 'approved', 0),
-(10, 'portfolio shoot', '', 6, '2022-09-19', '2022-09-19', ' Bardoli', 0, '', 'approved', 0),
-(11, 'party', '', 6, '2022-09-20', '2022-09-20', ' uka tarsadiya ', 0, '', 'approved', 0),
-(12, 'competetion', '', 6, '2022-09-06', '2022-09-14', ' nvs', 0, '', 'approved', 0),
-(13, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'approved', 0),
-(14, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'approved', 0),
-(15, 'personalized', 'parna', 6, '2022-09-27', '2022-09-28', ' nvs', 0, '', 'rejected', 31000),
-(16, 'wedding', '', 6, '2022-09-14', '2022-09-01', ' nvs', 0, '', 'rejected', 88500),
-(17, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'rejected', 31000),
-(18, 'anniversary', '', 6, '2022-09-17', '2022-09-17', ' bardoli', 0, '', 'rejected', 31000),
-(19, 'wedding', '', 6, '2022-09-13', '2022-09-01', ' asg', 0, '', 'pending', 57500),
-(20, 'inogration/opening', '', 6, '2023-09-27', '2022-09-15', ' fdj', 0, '', 'pending', 8000),
-(21, 'inogration/opening', '', 6, '2022-09-21', '2022-09-21', ' dahz', 0, '', 'approved', 80500);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bookingdetails`
---
-
-CREATE TABLE `bookingdetails` (
-  `bdid` int(11) NOT NULL,
-  `bid` int(11) NOT NULL,
-  `SrvEveID` int(11) NOT NULL,
-  `stid` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `bookingdetails`
---
-
-INSERT INTO `bookingdetails` (`bdid`, `bid`, `SrvEveID`, `stid`) VALUES
-(1, 16, 0, NULL),
-(2, 16, 0, NULL),
-(3, 16, 0, NULL),
-(4, 16, 0, NULL),
-(5, 16, 0, NULL),
-(6, 17, 0, NULL),
-(7, 17, 0, NULL),
-(8, 17, 0, NULL),
-(9, 17, 0, NULL),
-(10, 17, 0, NULL),
-(11, 21, 0, NULL),
-(12, 21, 0, NULL),
-(13, 21, 0, NULL),
-(14, 21, 0, NULL),
-(15, 21, 0, NULL),
-(16, 21, 0, NULL),
-(17, 21, 0, NULL);
+INSERT INTO `booking` (`bid`, `event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) VALUES
+(25, 'birthday', '', 19, '2022-10-19', '2022-10-19', ' chikhli', NULL, '', 'pending', 43500, '1,2,4,5'),
+(26, 'inogration/opening', '', 27, '2022-10-31', '2022-10-31', ' nvs', NULL, '', 'approved', 31000, '1,4,5');
 
 -- --------------------------------------------------------
 
@@ -151,8 +97,83 @@ CREATE TABLE `leaves` (
 --
 
 INSERT INTO `leaves` (`lid`, `uid`, `startdate`, `enddate`, `reason`, `leavestatus`) VALUES
-(1, 22, '2022-09-12', '2022-09-12', 'sick', 'approved'),
-(2, 22, '2022-09-12', '2022-09-12', 'sick', 'pending');
+(1, 6, '2022-09-12', '2022-09-12', 'picnic', 'pending'),
+(2, 22, '2022-09-12', '2022-09-12', 'sick', 'approved'),
+(3, 6, '2022-09-12', '2022-09-12', 'relative visit', 'pending'),
+(4, 22, '2022-09-12', '2022-09-12', 'death of relative', 'approved'),
+(5, 6, '2022-09-12', '2022-09-12', 'sick', 'approved'),
+(6, 6, '2022-09-12', '2022-09-12', 'picnic', 'rejected');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `oid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `deliverystatus` varchar(20) NOT NULL,
+  `pid` varchar(100) NOT NULL,
+  `ordertotal` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`oid`, `uid`, `deliverystatus`, `pid`, `ordertotal`) VALUES
+(1, 6, 'd', '1,2', 500),
+(2, 27, 'delivered', '2,3', 350);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `pid` int(11) NOT NULL,
+  `pname` varchar(50) NOT NULL,
+  `mid` varchar(50) NOT NULL,
+  `price` float NOT NULL,
+  `size` varchar(50) NOT NULL,
+  `color` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`pid`, `pname`, `mid`, `price`, `size`, `color`) VALUES
+(1, 'Frame', '1', 400, 'small', 'brown'),
+(2, 'Cup', '2', 300, 'small', 'black'),
+(3, 'Key chain', '3', 100, 'small', 'black'),
+(7, 'Bedsheet', '4', 250, 'small', 'blue'),
+(8, 'Cushion Cover', '5', 200, 'Small', 'White');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `rid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `subject` varchar(100) NOT NULL,
+  `experience` varchar(500) NOT NULL,
+  `rating` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`rid`, `uid`, `subject`, `experience`, `rating`) VALUES
+(1, 19, 'Overall', 'I booked Shah Abhay Photography for my Birthday party shoot, they were Amazing, the Cinematic Videos were just Brilliant. Loved them.', 5),
+(2, 27, 'Photography', 'Excellent Photography Skills.', 4.5),
+(3, 29, 'Editing', 'The Editing was very Professional. Specially the Beat Sync part was Awesome.', 4.5);
 
 -- --------------------------------------------------------
 
@@ -210,29 +231,27 @@ INSERT INTO `tbl_service_events` (`SrvEveID`, `SrvEveName`, `SrvEveCharges`) VAL
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
   `fname` varchar(50) NOT NULL,
-  `mname` varchar(50) NOT NULL,
   `lname` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `contact` bigint(20) NOT NULL,
   `gender` varchar(15) NOT NULL,
   `address` varchar(300) NOT NULL,
   `usertype` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `fname`, `mname`, `lname`, `username`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
-(1, 'Kalash', 'Abhay', 'Shah', 'k', 'k', 9426921383, 'male', 'Navsari', 'owner', 'kalashshahnvs@gmail.com'),
-(6, 'jainam', 'Abhay', 'Shah', 'j', 'j', 9874456321, 'male', 'navsari', 'client', 'jainamshah@gmail.com'),
-(18, 'Kashish', 'jigar', 'Sukhadia', 'ks', 'k', 9632587410, 'female', 'nvs', 'admin', 'kashishsukhadia8@gmail.com'),
-(19, 'aamena', 'zakir', 'shaikh', 'a', 'a', 8520147963, 'female', 'chikhli', 'admin', 'aamushaikh1010@gmail.com'),
-(20, 'nidhi', 'jay', 'patel', 'p', 'p', 7410258963, 'female', 'bardoli', 'client', 'nidhi@gmail.com'),
-(21, 'nishtha', 'satish', 'tandel', 'ni', 'n', 9632587410, 'female', 'nvs', 'client', 'tandelnishtha07@gmail.com'),
-(22, 'Amit', 'b', 'patel', 'am', 'a', 9874563210, 'male', 'vyara', 'admin', 'am@gmail.com');
+INSERT INTO `users` (`uid`, `fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
+(1, 'Kalash', 'Shah', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', '20bmiit040@gmail.com'),
+(6, 'jainam', 'shah', '363b122c528f54df4a0446b6bab05515', 7410852963, 'male', 'nvs', 'admin', '21bmiit079@gmai.com'),
+(19, 'aamena', 'shaikh', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com'),
+(22, 'amit', 'bhai', 'am', 8520147963, 'male', 'nvs', 'admin', 'amit@gmail.com'),
+(27, 'varshal', 'patel', '9e3669d19b675bd57058fd4664205d2a', 9874563210, 'male', 'kumbhar faliya', 'client', '20bmiit033@gmail.com'),
+(28, 'nishtha', 'tandel', 'e6c151d449e1db05b1ffb5ad5ec656cf', 7410258963, 'female', 'navsari', 'client', '20bmiit088@gmail.com'),
+(29, 'prince', 'patel', '64e1e1cbe1ca8e88ef3a838a3e7b57d6', 8520147963, 'male', 'bilimora', 'client', '20bmiit002@gmai.com');
 
 --
 -- Indexes for dumped tables
@@ -245,16 +264,28 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`bid`);
 
 --
--- Indexes for table `bookingdetails`
---
-ALTER TABLE `bookingdetails`
-  ADD PRIMARY KEY (`bdid`);
-
---
 -- Indexes for table `leaves`
 --
 ALTER TABLE `leaves`
   ADD PRIMARY KEY (`lid`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`oid`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`pid`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`rid`);
 
 --
 -- Indexes for table `staff`
@@ -273,7 +304,7 @@ ALTER TABLE `tbl_service_events`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`uid`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -283,19 +314,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `bookingdetails`
---
-ALTER TABLE `bookingdetails`
-  MODIFY `bdid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -313,7 +356,7 @@ ALTER TABLE `tbl_service_events`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
