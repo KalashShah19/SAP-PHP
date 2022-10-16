@@ -1,10 +1,19 @@
+<?php 
+  session_start(); 
+  include '../../conn.php'; 
+  $uid=$_SESSION['uid'];
+  $sql1="select count(mid) as count from media where uid=$uid and selected='yes';";
+  $result=mysqli_query($db, $sql1);
+  $data = mysqli_fetch_array($result);
+  if($data['count'] < 30 ){
+    $_SESSION['selection']="yes";
+  }
+  else {
+    $_SESSION['selection']="no";
+  }
+?>
 <!DOCTYPE html>
 <html>
-  <script>
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    
-</script>
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -59,14 +68,26 @@
       <div class="">
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <form action="clientphotos.php" method="post">
+            <form method="post">
               <div class="folders">
-                <button type="submit"> Haldi </button>
-                <button type="submit"> Ring Ceremony </button>
-                <button type="submit"> Var Mala</button>
-                <button type="submit"> Phera </button>
-                <button type="submit"> Vidai </button>
-                <button type="submit"> Reception </button>
+                <?php 
+                if($_SESSION['selection']=="yes"){
+                  include '../../conn.php'; 
+                  $uid=$_SESSION['uid'];
+                  $sql="select DISTINCT mediafolder from media where uid=$uid;";
+                  $result=mysqli_query($db, $sql);
+                  while($data = mysqli_fetch_array($result)) {
+                ?>
+                <button formaction="clientphotos.php?folder=<?php echo $data['mediafolder'];?>"> <?php echo strtoupper($data['mediafolder']);?> </button>
+                <?php } } 
+                else { ?>
+                  <div style="background-color: cyan; color: black">
+                  <br> <h2 style="text-align:center">
+                    You have Already Selected Enough Photos for Your Album.
+                   </h2> <br>
+                    </div>
+                <?php }
+                ?>
               </div>
               </div>
             </form>
@@ -75,14 +96,6 @@
       </div>
     </div>
   </section>
-  
-
-  <!-- Backend 
-  <?php
-    $user=$_POST['user'];
-    $pass=$_POST['pass'];
-  
-  ?> -->
 
   <!-- info section -->
   <?php

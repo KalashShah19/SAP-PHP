@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     
@@ -44,14 +45,15 @@
             Choose Exactly how will Your Album Looks Like.
           </p>
         </div>
+        <form method="POST">
       <div class="info_container">
         <div class="covslidershow covmiddle">
           <div class="covslides">
-            <input type="radio" name="r" id="r1">
-            <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">
-            <input type="radio" name="r" id="r4">
-            <input type="radio" name="r" id="r5">
+            <input type="radio" name="r" value="1" id="r1">
+            <input type="radio" name="r" value="2" id="r2">
+            <input type="radio" name="r" value="3" id="r3">
+            <input type="radio" name="r" value="4" id="r4">
+            <input type="radio" name="r" value="5" id="r5">
             <div class="covslide s1">
               <img src="../../images/cover1.jpg" alt="First">
             </div>
@@ -80,9 +82,22 @@
     </div>
   </div>
     <div class=" d-flex justify-content-center ">
-      <button style="background-color: #0fcfdc;" formaction="clientcart.php"> Add to Cart </a> 
+      <button type="submit" name="submit" style="background-color: #0fcfdc;"> Add to Cart </a> 
     </div>
+  </form>
 </section>
+
+
+<?php
+  if(isset($_POST['submit'])){
+    $cover=$_POST['r'];
+    $uid=$_SESSION['uid'];
+    include '../../conn.php';
+    $sql="update album set coid = '$cover' where uid=$uid;";
+    mysqli_query($db,$sql);
+    echo "<script>document.location.href='clientcart.php';</script>";
+  }
+?>
 
   <!-- info section -->
   <?php

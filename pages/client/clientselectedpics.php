@@ -1,3 +1,16 @@
+<?php session_start();  
+  include '../../conn.php'; 
+  $uid=$_SESSION['uid'];
+  $sql1="select count(mid) as count from media where uid=$uid and selected='yes';";
+  $result=mysqli_query($db, $sql1);
+  $data = mysqli_fetch_array($result);
+  if($data['count'] < 30 ){
+    $_SESSION['selection']="yes";
+  }
+  else {
+    $_SESSION['selection']="no";
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,144 +60,29 @@
           Your Best Selected Photos for Products
         </p>
       </div>
-      <form action="clientphotos.php">
+      <?php if($_SESSION['selection'] == "yes"){ ?>
+      <form action="clientfolders.php">
         <button style="font-size: x-large; border: 2px solid white; margin-left: 45%; color: white; background-color: rgb(0, 217, 255)" type="submit"> Select More Pics </button>
-      </form>
+      </form> <?php } ?>
       <div class="portfolio_container layout_padding2">
         <div class="row">
+        <?php 
+            $uid=$_SESSION['uid'];
+            $sql="select * from media where uid=$uid and selected='yes';";
+            $result=mysqli_query($db, $sql);
+            while($data = mysqli_fetch_array($result)) {
+              $name=$data['medianame'];
+              $path=$data['mediapath'];
+              $mid=$data['mid'];
+              $folder=$data['mediafolder'];
+              $image=$path.$folder."/".$name;
+          ?>
           <div class="column">
             <div class="img-box b-1">
-              <img src="../../images/first.jpg" alt="">
-              <div class="btn-box">
-              </div>
+              <img src="<?php echo $image; ?>" alt="">
             </div>
-            <div class="img-box b-1">
-              <img src="../../images/fourth.jpg" alt="">
-              <div class="btn-box">
-              </div>
             </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-3.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/fifth_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-6.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/sixth_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/portrait_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/first.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-5.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/ninth_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-          </div>
-         
-
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/third_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/fifth_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/seventh_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/first_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/seventh_image.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/p-1.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-2.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-3.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-5.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-6.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          <?php } ?>
     </div>
   </section>
 

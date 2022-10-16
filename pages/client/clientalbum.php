@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   
@@ -46,7 +47,7 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          Album Info
+          Album Selection
         </h2>
         <p>
           Choose the Style of Album You want
@@ -56,9 +57,15 @@
         <div class="row">
           <div class="col-md-8 mx-auto">
               <div class="contact_form-container">
-                  <form action="clientcovers.php" method="post"> 
-                    <label for="size"> Size </label>
-                    <select> 
+                <center>
+                  <div id="msg" style="background-color: cyan; color: black">
+                    <br> <h3 style="text-align:center">
+                      Kindly Select Size and Cover of Your Album </h3> <br>
+                  </div>
+                  <br> <br>
+                  <form method="post"> 
+                    <label for="size"> <h4> Size : </h4>  </label>
+                    <select name="size"> 
                         <option> Select </option>  
                         <option value="8×8"> 8×8 </option>
                         <option value="10x10"> 10x10 </option>
@@ -71,9 +78,10 @@
                         <option value="14x11"> 14x11 </option>
                         <option value="16x12"> 16x12 </option>
                     </select>
-                    <br>
-                    <button type="submit"> Covers </button>
+                    <br> <br> <h4> Select Cover : </h4>
+                    <button type="submit" name="submit"> Covers </button>
                 </form>
+                </center>
               </div>
           </div>
         </div>
@@ -81,14 +89,16 @@
     </div>
   </section>
   
-
-  <!-- Backend 
-  <?php
-    $user=$_POST['user'];
-    $pass=$_POST['pass'];
-  
-  ?> -->
-
+<?php 
+  if(isset($_POST['submit'])) {
+    $uid=$_SESSION['uid'];
+    $size=$_POST['size'];
+    include '../../conn.php';
+    $sql="insert into album (uid,size) values ('$uid','$size');";
+    mysqli_query($db,$sql);
+    echo "<script>document.location.href='clientcovers.php';</script>";
+  }
+?>
   <!-- info section -->
   <?php
     include '../../footers/footer.php';
