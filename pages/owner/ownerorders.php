@@ -14,7 +14,13 @@
 
   <title> Product Orders </title>
 
-
+  <style type="text/css">
+    table,tr,td,th{
+      border: 2px solid black;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
 
@@ -43,40 +49,56 @@
       <div class="container">
         <div class="heading_container">
           <h2>
-            Customized Product Orders
+            Product Orders
           </h2>
           <p>
-            Refer the Orders for Customized Products 
+            Refer the Pending Orders for Customized Products 
           </p>
         </div>
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="contact_form-container"> <hr> 
-                  <h3> Name : Varshal Patel </h3>
-                  <p> Order : Frame, Cup <p> 
-                  <p> Amount : 500 </p>
-                  <hr> <br>
+                <center>
+                  <table>
+                    <tr>
+                      <th> User </th>
+                      <th> Products </th>
+                      <th> Total </th>
+                      </tr>
 
-                  <h3> Name : Aamena Shaikh </h3>
-                  <p> Order : Phone Cover <p> 
-                  <p> Amount : 300 </p>
-                  <hr> <br>
+                    <?php
+                      include '../../conn.php';
+                      $sql="select fname, orders.pid,ordertotal,pname from orders join users on orders.uid=users.uid join products on products.pid=orders.pid;";
+                      $results = mysqli_query($db,$sql);
+                      while ($data = mysqli_fetch_array($results)) { ?>
+                        <tr>
+                          <td>
+                            <?php echo $data['fname'];?>
+                          </td>
+                          <td>
+                            <?php 
+                              $pid=$data['pid'];
+                              $ID = explode(",", $pid);
+                              $sql1="select * from products;";
+                              $res = mysqli_query($db,$sql1);
+                              while ($srv = mysqli_fetch_array($res)) { 
+                                foreach($ID as $id){
+                                  if($id == $srv['pid']){
+                                    echo $srv['pname']."<br>";
+                                  }
+                                }
+                              }
+                              ?>
+                          </td>
+                          <td>
+                            <?php echo $data['ordertotal'];?>
+                          </td>
+                        </tr>
 
-                  <h3> Name : Nishtha Tandel </h3>
-                  <p> Order : Photo Frame <p> 
-                  <p> Amount : 250 </p>
-                  <hr> <br>
-
-                  <h3> Name : Nidhi Patel </h3>
-                  <p> Order : Cushion <p> 
-                  <p> Amount : 150 </p>
-                  <hr> <br>
-
-                  <h3> Name : Kashish Sukhadiya </h3>
-                  <p> Order : Bedshhet <p> 
-                  <p> Amount : 200 </p>
-                  <hr> <br>
+                      <?php } ?>
+                  </table>
+                </center>
                 </div>
               </div>
             </div>

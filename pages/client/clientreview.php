@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
  
@@ -56,19 +57,34 @@
       <div class="">
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <form action="clientreview.php" method="post">
+            <form method="POST">
               <div class="contact_form-container">
                 <div>
+                <?php if(isset($_SESSION['message'])) { ?>
+                <div id="msg" style="background-color: cyan; color: black">
+                <br> <h5 style="text-align:center;">
+                  <?php echo $_SESSION['message'];
+                  unset($_SESSION['message']); ?>  
+                  </h5> 
+                  <br> 
+                </div>
+                <br>
+              <?php } ?>  
                   <div>
                     <label> Subject : </label>
                     <input type="text" name="sub">
                   </div>
                   <div>
+                    <label> Stars/Rating : (Out of 5)</label>
+                    <input type="number" name="rating" step="0.01" min="1" max="5">
+                  </div>
+                  
+                  <div>
                     <label> Your Experience : </label>
                     <input type="text" name="exp">
                   </div>
                   <div class=" d-flex justify-content-center ">
-                    <button type="submit">
+                    <button type="submit" name="submit">
                       Submit
                     </button>
                   </div>
@@ -87,6 +103,13 @@
   if(isset($_POST['submit'])) {
     $sub=$_POST['sub'];
     $exp=$_POST['exp'];
+    $rating=$_POST['rating'];
+    $uid=$_SESSION['uid'];
+    include '../../conn.php';
+    $sql="INSERT INTO `reviews`( `uid`, `subject`, `experience`, `rating`) VALUES ('$uid','$sub','$exp','$rating')";
+    mysqli_query($db, $sql);
+    $_SESSION['message']="Your Review Has Been Submitted Successfully! Thank You.";
+    echo "<script type='text/javascript'>document.location.href='clientreview.php';</script>";
   }
   ?>  
 

@@ -64,7 +64,7 @@
                   <center>
                     <?php if(isset($_SESSION['message'])) { ?>
                     <div id="msg" style="background-color: cyan; color: black">
-                    <br> <h5>
+                    <br> <h5 style="text-align:center">
                       <?php echo $_SESSION['message'];
                       unset($_SESSION['message']); ?>  
                       </h5> <br>
@@ -77,6 +77,8 @@
                       <th> Event </th>
                       <th> Start </th>
                       <th> End </th>
+                      <th> Services </th>
+                      <th> Budget </th>
                       <th colspan="2"> Actions </th>
                     </tr>
 
@@ -97,6 +99,24 @@
                           </td>
                           <td>
                             <?php echo $data['end'];?>
+                          </td>
+                          <td>
+                            <?php 
+                              $SrvEveID=$data['SrvEveID'];
+                              $ID = explode(",", $SrvEveID);
+                              $sql1="select * from tbl_service_events;";
+                              $res = mysqli_query($db,$sql1);
+                              while ($srv = mysqli_fetch_array($res)) { 
+                                foreach($ID as $id){
+                                  if($id == $srv['SrvEveID']){
+                                    echo $srv['SrvEveName']."<br>";
+                                  }
+                                }
+                              }
+                            ?>
+                          </td>
+                          <td>
+                            <?php echo $data['totalamount'];?>
                           </td>
                           <td>
                             <a href="ownerbooking.php?approved=<?php echo $data['bid'];?>" style="color:black; background-color: lime; border: 2px solid black"> Approve </a>

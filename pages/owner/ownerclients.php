@@ -84,7 +84,7 @@ session_start();
                         </tr>
                     <?php 
                       include '../../conn.php';
-                      $sql="select * from users where uid!=1;;";
+                      $sql="select * from users where uid!=1;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
                         <tr>
@@ -110,10 +110,10 @@ session_start();
                               <?php echo $data['usertype']; ?>
                           </td>
                           <td>
-                            <a style="background-color:lime;color:black"  href="ownerclients.php?edit=<?php echo $data['uid'];?>#edit"> Edit </a>
+                            <a style="border:1px solid black;background-color:lime;color:black"  href="ownerclients.php?edit=<?php echo $data['uid'];?>#edit"> Edit </a>
                           </td>
                           <td>
-                            <a style="background-color:red;color:white" href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Delete </a>
+                            <a style="border:1px solid black;background-color:red;color:white" href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Delete </a>
                           </td>
                         </tr> 
                         <?php

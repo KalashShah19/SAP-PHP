@@ -61,14 +61,15 @@
             <div class="col-md-8 mx-auto">  
                 <div class="contact_form-container">
                   <center>
-                    
                   <table>
                     <tr>
                       <td> Name </td>
                       <td> Event </td>
                       <td> Start </td>
                       <td> End </td>
-                      <td> Status </td>
+                      <td> Services </td>
+                      <td> Budget </td>
+                      <td> Status</td>
                     </tr>
 
                   <?php 
@@ -88,6 +89,24 @@
                           </td>
                           <td>
                             <?php echo $data['end'];?>
+                          </td>
+                          <td>
+                            <?php 
+                              $SrvEveID=$data['SrvEveID'];
+                              $ID = explode(",", $SrvEveID);
+                              $sql1="select * from tbl_service_events;";
+                              $results = mysqli_query($db,$sql1);
+                              while ($srv = mysqli_fetch_array($results)) { 
+                                foreach($ID as $id){
+                                  if($id == $srv['SrvEveID']){
+                                    echo $srv['SrvEveName']."<br>";
+                                  }
+                                }
+                              }
+                            ?>
+                          </td>
+                          <td>
+                            <?php echo $data['totalamount'];?>
                           </td>
                           <td>
                             <?php echo $data['bstatus'];?>

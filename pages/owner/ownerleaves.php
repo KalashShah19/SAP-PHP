@@ -13,6 +13,13 @@
 
   <title> Leaves Records </title>
 
+  <style type="text/css">
+    table,tr,td,th{
+      border: 2px solid black;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
@@ -42,7 +49,7 @@
       <div class="container">
         <div class="heading_container">
           <h2>
-            Leave Records
+            Leave Statistics
           </h2>
           <p>
             Past Data of Leaves of Satff
@@ -52,31 +59,62 @@
           <div class="row">
             <div class="col-md-8 mx-auto">
               <form action="" method="post">
-                <div class="contact_form-container"> <hr> 
-                  <h3>  Varshal Patel </h3>
-                  <p> Total Leaves : 15 </p>   
-                  <hr>
+                <div class="contact_form-container">
+                  <center>
+                  <table>
+                    <tr>
+                      <th> Name </th>
+                      <th> Leaves </th>
+                      <th> Requests </th>
+                      <th> Rejected </th>
+                      <th> Pending </th>
+                    </tr>  
+                    <?php
+                      include '../../conn.php';
+                      $sql="select distinct leaves.uid, fname from leaves join users on users.uid=leaves.uid;";
+                      $results = mysqli_query($db,$sql);
+                      while ($data = mysqli_fetch_array($results)) { $uid=$data['uid']; ?>
+                        <tr>
+                          <td>
+                            <?php echo $data['fname'];?>
+                          </td>
+                          <td>
+                            <?php
+                              $sql2="select count(lid) from leaves where uid='$uid' AND leavestatus='approved';";
+                              $re=mysqli_query($db, $sql2);
+                              $req=mysqli_fetch_array($re);
+                              echo $req['count(lid)'];
+                              ?>
+                          </td>
+                          <td>
+                            <?php
+                              $sql1="select count(lid) from leaves where uid=$uid;";
+                              $r=mysqli_query($db, $sql1);
+                              $c=mysqli_fetch_array($r);
+                              echo $c['count(lid)'];
+                            ?>
+                          </td>
+                          <td>
+                          <?php
+                              $sql3="select count(lid) from leaves where uid=$uid AND leavestatus='rejected';";
+                              $res=mysqli_query($db, $sql3);
+                              $rej=mysqli_fetch_array($res);
+                              echo $rej['count(lid)'];
+                            ?>
+                          </td>
+                          <td>
+                          <?php
+                              $sql3="select count(lid) from leaves where uid=$uid AND leavestatus='pending';";
+                              $res=mysqli_query($db, $sql3);
+                              $rej=mysqli_fetch_array($res);
+                              echo $rej['count(lid)'];
+                            ?>
+                          </td>
+                        </tr>
 
-                  <h3> Nishtha Tandel </h3>
-                  <p> Total Leaves : 3 </p>   
-                  <hr>
-
-                  <h3> Aamena Shaikh </h3>
-                  <p> Total Leaves : 1 </p>   
-                  <hr>
-
-                  <h3> Jainam Shah </h3>
-                  <p> Total Leaves : 7 </p>   
-                  <hr>
-
-                  <h3> Kashish Sukhadiya </h3>
-                  <p> Total Leaves : 5 </p>   
-                  <hr>
-
-                  <h3> Nidhi Patel </h3>
-                  <p> Total Leaves : 10 </p>   
-                  <hr>
-
+                      <?php } ?>
+                  </table>
+                      </center>
                 </div>
               </form>
             </div>

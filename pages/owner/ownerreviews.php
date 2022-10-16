@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <script>
+        var path = window.location.pathname;
+        var page = path.split("/").pop();
+        
+    </script>
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -11,7 +16,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title> History</title>
+  <title> Contact Messages </title>
 
 
   <!-- bootstrap core css -->
@@ -24,6 +29,14 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="../../css/responsive.css" rel="stylesheet" />
+
+  <style>
+    table, tr, td, th {
+      border: 1px solid black;
+      text-align: center;
+      padding:10px;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -42,34 +55,46 @@
       <div class="container">
         <div class="heading_container">
           <h2>
-            History / Past
+            Review / Feedbacks
           </h2>
           <p>
-            Flashbacks
+            Reviews / Feedbacks from Clients
           </p>
         </div>
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
-              <form action="" method="post">
-                <div class="contact_form-container"> <hr> 
-                <center>
-                  <button formaction="ownerorderrecord.php"> Orders </button> <br>
-                  <button formaction="ownerleaverecord.php"> Leaves</button> <br>
-                  <button formaction="ownerreviews.php"> Reviews </button> <br>
-                  <button formaction="ownerbookingsrecord.php"> Bookings </button> <br>
-                  <button formaction="ownercontact.php"> Contact Messages </button> <br>
-                  <hr> 
-                </center>
-                </div>
-              </form>
+                <div class="contact_form-container"> 
+                  <center>
+                    <table>
+                      <tr>
+                        <th> Name </th>
+                        <th> Rating </th>
+                        <th> Subject </th>
+                        <th> Experience </th>
+                      </tr>
+
+                      <?php
+                        include '../../conn.php';
+                        $sql="select * from reviews join users on users.uid=reviews.uid;";
+                        $results = mysqli_query($db,$sql);
+                        while ($data = mysqli_fetch_array($results)) { ?>
+                      <tr>
+                        <td> <?php echo $data['fname']; ?></td>
+                        <td> <?php echo $data['rating']; ?></td>
+                        <td> <?php echo $data['subject']; ?></td>
+                        <td> <?php echo $data['experience']; ?></td>
+                      </tr>
+                      <?php } ?>
+                    </table>
+                  </center>
+                    
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  
-  
 
   <!-- info section -->
   <?php
@@ -77,6 +102,7 @@
   ?>
   <!-- footer section -->
 
+ 
 </body>
 
 </html>

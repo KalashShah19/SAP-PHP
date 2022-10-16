@@ -31,7 +31,7 @@
                       <a class="nav-link" href="ownerorders.php"> Product Orders <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="leaves">
-                        <a class="nav-link" href="ownerleaves.php"> Leave Records <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="ownerleaves.php"> Leave Statistics <span class="sr-only">(current)</span></a>
                       </li>
                       <li class="nav-item" id="history">
                         <a class="nav-link" href="ownerhistory.php"> History / Past <span class="sr-only">(current)</span></a>

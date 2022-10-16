@@ -4018,15 +4018,13 @@
     $total=$_POST['total'];
     $instruction=$_POST['instruction'];
     $arr=$_POST['services'];
-    $SrvEveID="";
-    foreach($arr as $val){
-      $SrvEveID=$SrvEveID.",".$val;
-    }
-    echo "<script> alert($SrvEveID);</script>";
-    echo "<script> alert($bend);</script>";
+    $SrvEveID=implode(",",$arr);
+    // echo "<script> alert(\"$SrvEveID\");</script>";
+    // echo "<script> alert(\"$bend\");</script>";
 
 
-    $sql="INSERT INTO `booking`(`event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) VALUES ('$event','$personalized','$uid','$bstart','$bend','$baddress','$total','$instruction','SrvEveID')";
+    $sql="INSERT INTO `booking`(`event`, `personalized`, `uid`, `start`, `end`, `baddress`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) 
+    VALUES ('$event','$personalized','$uid','$bstart','$bend','$baddress','$instruction','pending','$total','$SrvEveID')";
     mysqli_query($db, $sql);
     // echo '<script> alert("Your Booking Request has Been Placed.");</script>';
   }

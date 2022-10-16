@@ -63,7 +63,7 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   z-index: 1;
-  background-image: url(../../images/heading-img.png);
+  background-image: url(../images/heading-img.png);
   background-repeat: no-repeat;
 }
 
@@ -71,7 +71,7 @@ body {
 .hero_area {
   height: 136vh;
   position: relative;
-  background-image: url(../../images/hero-bg.png);
+  background-image: url(../images/hero-bg.png);
   background-size: cover;
 }
 
@@ -196,7 +196,7 @@ a:focus {
 }
 
 .custom_nav-container .navbar-toggler .navbar-toggler-icon {
-  background-image: url(../..//images/menu.png);
+  background-image: url(../images/menu.png);
   background-size: 45px;
 }
 
