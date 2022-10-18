@@ -59,12 +59,12 @@
             <form action="clientprofile.php" method="post">
               <div class="contact_form-container">
                 <div>
-                  <!-- <p> Profile Picture : </p>
-                  <img src="../../images/kalash.jpg" width="100px"> <br> <br> <br> -->
+                  <p> Profile Picture : </p>
+                  <img src="../../images/kalash.jpg" width="100px"> <br> <br> <br>
                   <?php 
-                    $id=$_SESSION['uid'];
+                    $uid=$_SESSION['uid'];
                     include '../../conn.php';
-                    $sql="select * from users where uid=$id;";
+                    $sql="select * from users where uid=$uid;";
                     $results=mysqli_query($db, $sql);
                     while($data = mysqli_fetch_array($results)) {
                   ?>
@@ -144,9 +144,8 @@
     $address=$_POST['address'];
     $contact=$_POST['contact'];
     $gender=$_POST['gender'];
-    $pass=0;
     
-    $sql="UPDATE `users` SET `fname`='$fname',lname`='$lname',contact`='$contact',gender='$gender',`address`='$address',`email`='$email'  WHERE uid=$id;";
+    $sql="UPDATE `users` SET `fname`='$fname',`lname`='$lname',`contact`='$contact',`gender`='$gender',`address`='$address',`email`='$email' WHERE uid=$uid;";
     mysqli_query($db, $sql);
     echo '<script> alert("Your Profile has been Updated Successfully.");</script>';
     echo '<script> document.location.href="clientprofile.php";</script>';

@@ -61,12 +61,11 @@
             <div class="col-md-8 mx-auto">
                 <form action="clientreceipt.php" method="post">
                   <br><br>
-                  <p style="text-align: center; color: green"> Total Amount = 12550 </p>
                   <label for="method"> Select Method :- </label>  
                   <div class="folders">
-                      <button type="submit"> UPI </button>
-                      <button type="submit"> DEBIT CARD </button>
-                      <button type="submit"> CREDIT CARD </button>
+                      <button type="submit" name="UPI"> UPI </button>
+                      <button type="submit" name="DEBIT"> DEBIT CARD </button>
+                      <button type="submit" name="CREDIT"> CREDIT CARD </button>
                     </div>
                   </div>
                 </form>
@@ -79,8 +78,9 @@
 
   <!-- Backend 
   <?php
-    $user=$_POST['user'];
-    $pass=$_POST['pass'];
+    if(isset($_POST['UPI'])){
+      // mysqli_query($db, "insert into payment");
+    }
   
   ?> -->
 

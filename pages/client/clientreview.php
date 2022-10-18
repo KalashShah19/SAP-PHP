@@ -72,7 +72,7 @@
               <?php } ?>  
                   <div>
                     <label> Subject : </label>
-                    <input type="text" name="sub">
+                    <input type="text" name="sub" required>
                   </div>
                   <div>
                     <label> Stars/Rating : (Out of 5)</label>
@@ -81,7 +81,7 @@
                   
                   <div>
                     <label> Your Experience : </label>
-                    <input type="text" name="exp">
+                    <input type="text" name="exp" required>
                   </div>
                   <div class=" d-flex justify-content-center ">
                     <button type="submit" name="submit">

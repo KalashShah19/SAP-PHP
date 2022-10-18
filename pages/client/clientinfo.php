@@ -1,3 +1,8 @@
+<?php 
+  session_start(); 
+  include '../../conn.php';
+  $uid=$_SESSION['uid'];
+?>
 <!DOCTYPE html>
 <html>
     
@@ -34,6 +39,16 @@
     <!-- end header section -->
 </div>
 
+      <?php if(isset($_SESSION['msg'])) { ?>
+        <div id="msg">
+        <div id="msg" style="background-color: cyan; color: black">
+        <br> <h5 style="text-align:center">
+          <?php echo $_SESSION['msg'];
+          unset($_SESSION['msg']); ?>  
+          </h5> <br>
+        </div> <br> <br>
+        </div>
+      <?php } ?>
     <section class="contact_section layout_padding">
       <div class="bg-img1">
         <img src="../../images/bg-img-1.png" alt="">
@@ -52,43 +67,62 @@
         </div>
         <div class="">
             <div class="row">
-              <div class="col-md-8 mx-auto">
+              <div class="col-md-7 mx-auto">
                 <div class="contact_form-container">
                   <div class="row">
                     <div class="column">
                       <div class="img-box b-1">
-                      <form action="clientcart.php" method="post">
-                          <img src="../../products/keychain.jpg" alt="Cup">
+                      <?php 
+                        if(isset($_GET['pid'])){
+                          $pid=$_GET['pid'];
+                        }
+                        $results=mysqli_query($db, "select * from products join media on media.mid=products.mid where pid=$pid GROUP BY pname;");
+                        while($data = mysqli_fetch_array($results)){
+                      ?>
+                        <h2> <?php echo $data['pname'] ?> </h2>   
+                      <form method="POST">
+                          <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>">
                         </div>
                       </div>
-                    
                       <div class="column">
                         <div class="img-box b-1">
+                          <?php 
+                            if($data['pname']=="Album"){
+                          ?>
+                          <button name="cover" formaction="clientcovers.php"> SelectCover </button>
+                          <?php } ?> 
                            <label for="size"> Size : </label>
 
-                          <select id="size">
-                            <option value="Small"> Small </option>
-                            <option value="Medium"> Medium </option>
-                            <option value="Large"> Large </option>
+                          <select id="size" name="size">
+                            <?php 
+                              $pname=$data['pname'];
+                              $sql1="select distinct size from products where pname='$pname'";
+                              $res=mysqli_query($db, $sql1); 
+                              while($d = mysqli_fetch_array($res)){  ?>
+                              <option value="<?php echo $d['size']; ?>"> <?php echo $d['size']; ?> </option>
+                            <?php } ?>
                           </select>
                           
-                          <br>
+                          <br> <br>
                           <label for="color"> Color : </label>
-                          <select id="color">
-                            <option value="blue"> Blue </option>
-                            <option value="Black"> Black </option>
-                            <option value="Red"> Red </option>
-                            <option value="White"> White </option>
-                            <option value="Grey"> Grey </option>
+                          <select id="color" name="color">
+                          <?php 
+                              $pname=$data['pname'];
+                              $sql2="select distinct color from products where pname='$pname'";
+                              $re=mysqli_query($db, $sql2); 
+                              while($dt = mysqli_fetch_array($re)){  ?>
+                              <option value="<?php echo $dt['color']; ?>"> <?php echo $dt['color']; ?> </option>
+                            <?php } ?>
                           </select> 
                             
-                          <br>
-                          <p> Price : 300 /- Rs <br> </p>
+                          <br> <br>
+                          <p> Price : <?php echo $data['price'];?> /- Rs <br> </p> 
                         </div>
                       </div>
                     </div>
+                    <?php } ?>
                 <div class=" d-flex justify-content-center ">
-                    <button type="submit">
+                    <button type="submit" name="cart">
                     Add to Cart
                 </button> 
             </div>
@@ -100,6 +134,16 @@
     </div>
   </div>
     </section>
+
+    <?php 
+      $coid=0;
+      if(isset($_POST['cart'])){
+        $sql3="insert into cart (uid, pid) values('$uid','$pid');";
+        mysqli_query($db, $sql3);
+        $_SESSION['msg']="Product was Added Successfully in Your Cart.";
+        echo '<script> document.location.href="clientcart.php";</script>';
+      }
+    ?>
   
 
   <!-- info section -->

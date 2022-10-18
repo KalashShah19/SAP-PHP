@@ -1,3 +1,7 @@
+<?php 
+  session_start(); 
+  $_SESSION['login']="false";
+?>
 <!DOCTYPE html>
 <html>
 <head>

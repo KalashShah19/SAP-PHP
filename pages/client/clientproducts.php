@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
  
@@ -34,7 +35,6 @@
     <?php include '../../headers/client/header.php';?>
     <!-- end header section -->
 
-
   <!-- portfolio section -->
 
   <section class="portfolio_section layout_padding">
@@ -49,110 +49,29 @@
       </div>
       <div class="portfolio_container layout_padding2">
         <div class="row">
+        <?php
+          include '../../conn.php';
+          $sql="select * from products join media on products.mid=media.mid group by pname;";
+          $results=mysqli_query($db,$sql);
+          while($data=mysqli_fetch_array($results)){
+        ?>
           <center>
           <div class="column">
-            <center style="background-color: black; color: white"> Album </center>
+            <center style="background-color: black; color: white"> <?php echo $data['pname']; ?> </center>
             <div class="img-box b-1">
-              <img src="../../products/album.jpg" onclick="" alt="Cup">
+              <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>" onclick="">
               <div class="info-box">
-                <a href="clientalbum.php" class="info">
-                </a>
+                <a href="clientinfo.php?pid=<?php echo $data['pid'];?>" class="info"> </a>
               </div>
             </div>
             <br><br>
-
-            <center style="background-color: black; color: white"> Short Film </center>
-            <div class="img-box b-1">
-              <img src="../../products/film.png" alt="Cup">
-              <div class="info-box">
-                <a href="clientalbum.php" class="info">
-                </a>
-              </div>
-            </div>
-            <br><br>
-
-            <center style="background-color: black; color: white"> Cup </center>
-            <div class="img-box b-1">
-              <img src="../../products/cup.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-            <br><br>
-            <center style="background-color: black; color: white"> Stickers </center>
-            <div class="img-box b-1">
-              <img src="../../products/stickers.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-            <br><br>
-            <center style="background-color: black; color: white"> Bed Sheet </center>
-            <div class="img-box b-1">
-              <img src="../../products/bedsheet.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-            <br><br>
-            <center style="background-color: black; color: white"> Cushion </center>
-            <div class="img-box b-1">
-              <img src="../../products/cushion.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-          <br><br>
-
-          <center style="background-color: black; color: white"> Key Chain </center>
-            <div class="img-box b-1">
-              <img src="../../products/keychain.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-          <br><br>
-
-          <center style="background-color: black; color: white"> Frame </center>
-            <div class="img-box b-1">
-              <img src="../../products/frame.jfif" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-          <br><br>
-
-          <center style="background-color: black; color: white"> Back Cover </center>
-            <div class="img-box b-1">
-              <img src="../../products/cover.jpg" alt="">
-              <div class="info-box">
-                <a href="clientinfo.php" class="info">
-                </a>
-              </div>
-            </div>
-          </div>
-          <br><br>
-          
-          
-            </center>
+          </center>
+          <?php } ?>
         </div>
       </div>
-      
     </div>
-  <script>
-    function info(){
-      document.location.href="clientinfo.php";
-    }
-  </script>
   </section>
-
-  <!-- end about section -->
+    <!-- end about section -->
 
   <!-- info section -->
   <?php

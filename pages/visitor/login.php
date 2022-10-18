@@ -120,7 +120,7 @@
         if($type=="client")
           echo "<script type='text/javascript'>document.location.href='../client/clienthome.php';</script>";
         else if($type=="admin")
-          echo "<script type='text/javascript'>document.location.href='../admin/adminbooking.php';</script>";
+          echo "<script type='text/javascript'>document.location.href='../admin/adminleave.php';</script>";
         else if($type=="owner")
         echo "<script type='text/javascript'>document.location.href='../owner/ownerclients.php';</script>";
       }

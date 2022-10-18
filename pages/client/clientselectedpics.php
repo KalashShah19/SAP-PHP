@@ -62,7 +62,9 @@
       </div>
       <?php if($_SESSION['selection'] == "yes"){ ?>
       <form action="clientfolders.php">
-        <button style="font-size: x-large; border: 2px solid white; margin-left: 45%; color: white; background-color: rgb(0, 217, 255)" type="submit"> Select More Pics </button>
+        <center>
+        <button style="font-size: x-large; border: 2px solid white; color: white; background-color: rgb(0, 217, 255)" type="submit"> Select More Pics </button>
+        </center>
       </form> <?php } ?>
       <div class="portfolio_container layout_padding2">
         <div class="row">

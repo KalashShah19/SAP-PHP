@@ -73,12 +73,12 @@
                     <td class="tabl"> 9874652130 <br> <br> </td>
                   </tr>
                   <tr class="tabl">
-                    <td class="tabl"> Order </td>
+                  <td class="tabl"> Order </td>
                     <td class="tabl"> Album, Cup, Stickers, Photo Frame <br> <br> </td>
                   </tr>
                   <tr class="tabl">
-                    <td class="tabl"> Payment Date </td>
-                    <td class="tabl"> 30 / 07 / 2022 <br> <br> </td>
+                  <td class="tabl"> Amount </td>
+                    <td class="tabl"> 30200 <br> <br> </td>
                   </tr>
                   <tr class="tabl">
                     <td class="tabl"> Payment Method </td>
@@ -86,7 +86,6 @@
                   </tr>
                 </table>
                 
-                <button type="submit"> Download </button>
                 <button type="submit"> Home </button>
               </div>
             </form>

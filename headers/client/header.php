@@ -1,4 +1,4 @@
-<header class="header_section">
+  <header class="header_section">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-11 offset-lg-1">

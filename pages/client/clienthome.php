@@ -1,7 +1,9 @@
 <?php
   session_start();
-  if(!isset($_SESSION['login'])){
-    echo "Your are not a Valid User!! Go to <a href=\"../visitor/login.php\"> Login </a>";
+  if($_SESSION['login']=="false"){
+    echo "
+    <br> <h5 style=\"text-align:center\">
+    Your are not a Valid User!! Go to <a href=\"../visitor/login.php\"> Login </a>";
   }
   else {
 ?>
@@ -64,7 +66,12 @@
                 <div class="contact_form-container">
                   <?php if(isset($_SESSION['msg'])) { ?>
                   <div id="msg">
-                    <h2> <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?> <br>
+                  <div id="msg" style="background-color: cyan; color: black">
+                  <br> <h5 style="text-align:center">
+                    <?php echo $_SESSION['msg'];
+                    unset($_SESSION['msg']); ?>  
+                    </h5> <br>
+                  </div> <br> <br>
                   </div>
                   <?php } ?>
                   <h2> Welcome, <?php echo $_SESSION['fname']; ?> .</h2> <br>
@@ -77,7 +84,7 @@
                       <table>
                         <tr> 
                           <td>
-                            <li> Edit Profile </li>
+                            <li> To Edit Profile </li>
                           </td>
                           <td style="padding: 25px;">
                             =>
@@ -88,7 +95,7 @@
                         </tr>
                         <tr> 
                           <td>
-                            <li> Wanna Capture Memories of Your Event </li>
+                            <li> To Capture Memories of Your Event </li>
                           </td>
                           <td style="padding: 25px;">
                             =>
@@ -100,7 +107,7 @@
                         
                         <tr> 
                           <td>
-                            <li> Wanna Checkout Selected Photos, </li>
+                            <li> To Checkout Selected Photos, </li>
                           </td>
                           <td style="padding: 25px;">
                             =>
@@ -155,6 +162,18 @@
                           </td>
                           <td> 
                             Click <a href="clientproducts.php"> Here </a> <br>
+                          </td>
+                        </tr>
+                        
+                        <tr> 
+                          <td>
+                            <li> To See Cart, </li>
+                          </td>
+                          <td style="padding: 25px;">
+                            =>
+                          </td>
+                          <td> 
+                            Click <a href="clientcart.php"> Here </a> <br>
                           </td>
                         </tr>
 

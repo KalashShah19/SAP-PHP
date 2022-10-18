@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $uid=$_SESSION['uid'];
+?>
 <!DOCTYPE html>
 <html>
    
@@ -34,6 +38,16 @@
     <!-- end header section -->
 </div>
 
+    <?php if(isset($_SESSION['msg'])) { ?>
+      <div id="msg">
+      <div id="msg" style="background-color: cyan; color: black">
+      <br> <h5 style="text-align:center">
+        <?php echo $_SESSION['msg'];
+        unset($_SESSION['msg']); ?>  
+        </h5> <br>
+      </div> <br> <br>
+      </div>
+    <?php } ?>
     <section class="contact_section layout_padding">
       <div class="bg-img1">
         <img src="../../images/bg-img-1.png" alt="">
@@ -55,53 +69,29 @@
             <div class="col-md-8 mx-auto">
               <div class="contact_form-container">
                 <div class="row">
+                  <?php 
+                  $total=0;
+                    include '../../conn.php';
+                    $sql="select * from cart join products on cart.pid=products.pid join media on media.mid=products.mid where cart.uid=$uid;";
+                    $results=mysqli_query($db, $sql);
+                    while($data = mysqli_fetch_array($results)){
+                  ?>
                   <div class="column">
                     <div class="img-box b-1">
                       <div class="img-box b-1">
-                        <img src="../../products/album.jpg" alt="Cup">
-                        <br> <br> <p> Size : 12x8 <br> </p>
-                        <p> Price : 12000 /- Rs <br> </p>
+                        <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>">
+                        <br> <br> <p> Size : <?php echo $data['size']; ?> <br> </p>
+                         <p> Color : <?php echo $data['color']; ?> <br> </p>
+                        <p> Price : <?php echo $data['price']; $total=$total+$data['price']; ?> /- Rs <br> </p>
+                        <p> <a style="background-color:black; color:white" href="clientcart.php?del=<?php echo $data['pid']; ?>"> Delete </a> </p>
                       </div>
                     </div>
                   </div>
-        
-                  <div class="column">
-                    <div class="img-box b-1">
-                      <div class="img-box b-1">
-                        <img src="../../products/cup.jpg" alt="Cup">
-                        <br> <br> <p> Size : Medium <br> </p>
-                        <p> Price : 300 /- Rs <br> </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="column">
-                    <div class="img-box b-1">
-                      <div class="img-box b-1">
-                        <img src="../../products/stickers.jfif" alt="Cup">
-                        <br> <br> <p> Size : Small  <br> </p>
-                        <p> Price : 50 /- Rs <br> </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="column">
-                    <div class="img-box b-1">
-                      <div class="img-box b-1">
-                        <img src="../../products/frame.jfif" alt="Cup">
-                        <br> <br> <p> Size : Small <br> </p>
-                        <p> Price : 200 /- Rs <br> </p>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-
-        
-
+                  <?php } ?>
               <div class=" d-flex justify-content-center ">
-                <form action="clientpayment.php" method="post">
-                      <p> Total Amount = 12550 </p>
-                       <button type="submit" name="submit">
+                <form method="post">
+                      <br><br><h2> Total Amount = <?php echo $total; ?> /- RS </h2>
+                       <button type="submit" name="pay">
                         Confirm And Pay
                       </button> 
                 </div>
@@ -111,6 +101,27 @@
         </div>
       </div>
     </section>
+
+    <?php 
+      if(isset($_GET['del'])){
+        $pid=$_GET['del'];
+        mysqli_query($db, "delete from cart where pid=$pid and uid=$uid;");
+        $_SESSION['msg']="That Product was Deleted Successfully from Your Cart.";
+        echo "<script>document.location.href='clientcart.php';</script>";
+    }
+
+    if(isset($_POST['pay'])){
+      $ids="";
+        $res=mysqli_query($db,"select pid from cart where uid=$uid;");
+        while($str=mysqli_fetch_array($res)){
+          $ids.=",".$str['pid'];
+        }
+
+        mysqli_query($db, "INSERT INTO `orders`(`uid`, `deliverystatus`, `pid`, `ordertotal`) VALUES ('$uid', 'pending', '$ids', '$total');");
+        mysqli_query($db, "delete from cart where uid=$uid;");
+        echo "<script>document.location.href='clientpayment.php';</script>";
+    }
+    ?>
 
   <!-- info section -->
   <?php

@@ -157,14 +157,17 @@
       $add=$_POST['add'];
       $type="client";
     
+      $reg=0;
       $numberpattern="/^[0-9]{10}+$/";
         if(isset($num))
         {
           if(preg_match($numberpattern, $num)==0) {
+            $reg=0;
             echo '<script> alert("Invalid Mobile Number !"); </script>';
           }else {
             include '../../conn.php';
 
+            if($reg==1)
             $sql = "INSERT INTO `users`(`fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$lname', '$pass', '$num', '$gender', '$add', '$type', '$email');";
             mysqli_query($db,$sql);
             echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';

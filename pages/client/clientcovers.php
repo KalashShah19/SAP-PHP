@@ -82,20 +82,15 @@
     </div>
   </div>
     <div class=" d-flex justify-content-center ">
-      <button type="submit" name="submit" style="background-color: #0fcfdc;"> Add to Cart </a> 
+      <button type="submit" name="select" style="background-color: #0fcfdc;"> Select </a> 
     </div>
   </form>
 </section>
 
 
 <?php
-  if(isset($_POST['submit'])){
-    $cover=$_POST['r'];
-    $uid=$_SESSION['uid'];
-    include '../../conn.php';
-    $sql="update album set coid = '$cover' where uid=$uid;";
-    mysqli_query($db,$sql);
-    echo "<script>document.location.href='clientcart.php';</script>";
+  if(isset($_POST['select'])){
+    echo "<script>document.location.href='clientinfo.php?pid=9';</script>";
   }
 ?>
 

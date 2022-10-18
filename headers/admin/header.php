@@ -15,14 +15,14 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
                   <ul class="navbar-nav">
+                    <li class="nav-item" id="apply">
+                      <a class="nav-link" href="adminleave.php"> Apply Leave <span class="sr-only">(current)</span></a>
+                    </li>
                   <li class="nav-item" id="booking">
                       <a class="nav-link" href="adminbooking.php"> Booking Requests <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="product">
                       <a class="nav-link" href="adminorders.php"> Product Orders <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item" id="apply">
-                      <a class="nav-link" href="adminleave.php"> Apply Leave <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="requests">
                         <a class="nav-link" href="adminleaverequests.php"> Leave Requests <span class="sr-only">(current)</span></a>
