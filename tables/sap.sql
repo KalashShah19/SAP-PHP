@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2022 at 11:34 AM
+-- Generation Time: Oct 18, 2022 at 08:08 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -48,7 +48,29 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`bid`, `event`, `personalized`, `uid`, `start`, `end`, `baddress`, `travelcharges`, `instructions`, `bstatus`, `totalamount`, `SrvEveID`) VALUES
 (25, 'birthday', '', 19, '2022-10-19', '2022-10-19', ' chikhli', NULL, '', 'pending', 43500, '1,2,4,5'),
-(26, 'inogration/opening', '', 27, '2022-10-31', '2022-10-31', ' nvs', NULL, '', 'approved', 31000, '1,4,5');
+(26, 'inogration/opening', '', 27, '2022-10-31', '2022-10-31', ' nvs', NULL, '', 'approved', 31000, '1,4,5'),
+(27, 'party', '', 30, '2022-10-19', '2022-10-19', ' Navsari', NULL, '', 'pending', 43500, '1,2,4,5'),
+(29, 'sports tournament', '', 30, '2022-10-25', '2022-10-28', ' Navsari', NULL, '', 'pending', 18000, '1,4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cid` int(11) NOT NULL,
+  `pid` varchar(50) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `coid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cid`, `pid`, `uid`, `coid`) VALUES
+(30, '3', 19, 0);
 
 -- --------------------------------------------------------
 
@@ -107,6 +129,48 @@ INSERT INTO `leaves` (`lid`, `uid`, `startdate`, `enddate`, `reason`, `leavestat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `media`
+--
+
+CREATE TABLE `media` (
+  `mid` int(11) NOT NULL,
+  `medianame` varchar(100) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `mediapath` varchar(200) NOT NULL,
+  `mediatype` varchar(20) NOT NULL,
+  `mediafolder` varchar(100) NOT NULL,
+  `selected` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`mid`, `medianame`, `uid`, `mediapath`, `mediatype`, `mediafolder`, `selected`) VALUES
+(1, 'img1.jpg', 19, '../../images/', 'image', 'haldi/', 'yes'),
+(2, 'img2.jpg', 19, '../../images/', 'image', 'haldi/', 'no'),
+(3, 'img3.jpg', 19, '../../images/', 'image', 'haldi/', 'no'),
+(4, 'img1.png', 19, '../../images/', 'image', 'mehndi/', 'yes'),
+(5, 'img2.jpg', 19, '../../images/', 'image', 'mehndi/', 'yes'),
+(6, 'img3.jpg', 19, '../../images/', 'image', 'mehndi/', 'no'),
+(7, 'img4.jpg', 19, '../../images/', 'image', 'haldi/', 'yes'),
+(8, 'img5.jpg', 19, '../../images/', 'image', 'haldi/', 'no'),
+(9, 'img6.jpg', 19, '../../images/', 'image', 'haldi/', 'no'),
+(10, 'img7.jpg', 19, '../../images/', 'image', 'haldi/', 'yes'),
+(11, 'album.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(12, 'bedsheet.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(13, 'cover.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(14, 'cup.jpg', 1, '../../images/', 'image', 'products/', 'no'),
+(15, 'cushion.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(16, 'film.png', 1, '../../images/', 'image', 'products/', 'no'),
+(17, 'frame.jfif', 1, '../../images/', 'image', 'products/', 'yes'),
+(18, 'keychain.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(19, 'page.jpg', 1, '../../images/', 'image', 'products/', 'yes'),
+(20, 'stickers.jfif', 1, '../../images/', 'image', 'products/', 'no');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -123,8 +187,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`oid`, `uid`, `deliverystatus`, `pid`, `ordertotal`) VALUES
-(1, 6, 'd', '1,2', 500),
-(2, 27, 'delivered', '2,3', 350);
+(1, 6, 'pending', '1,2', 500),
+(2, 27, 'delivered', '2,3', 350),
+(4, 19, 'pending', ',9,2,8', 30500),
+(5, 19, 'pending', ',9,2,8', 30500),
+(6, 19, 'pending', ',2,1,2', 1000);
 
 -- --------------------------------------------------------
 
@@ -146,11 +213,28 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pid`, `pname`, `mid`, `price`, `size`, `color`) VALUES
-(1, 'Frame', '1', 400, 'small', 'brown'),
-(2, 'Cup', '2', 300, 'small', 'black'),
-(3, 'Key chain', '3', 100, 'small', 'black'),
-(7, 'Bedsheet', '4', 250, 'small', 'blue'),
-(8, 'Cushion Cover', '5', 200, 'Small', 'White');
+(1, 'Frame', '17', 400, 'small', 'brown'),
+(2, 'Cup', '14', 300, 'small', 'black'),
+(3, 'Key chain', '18', 100, 'small', 'black'),
+(7, 'Bedsheet', '12', 250, 'small', 'blue'),
+(8, 'Cushion Cover', '15', 200, 'Small', 'White'),
+(9, 'Album', '11', 30000, '10x10', 'red'),
+(10, 'Short Film', '16', 10000, 'small', '-'),
+(11, 'Stickers', '20', 100, 'small', 'black'),
+(12, 'Key chain', '18', 100, 'medium', 'black'),
+(13, 'Key chain', '18', 100, 'large', 'black'),
+(14, 'Key chain', '18', 100, 'large', 'white'),
+(15, 'Key chain', '18', 100, 'large', 'red'),
+(16, 'Key chain', '18', 100, 'large', 'yellow'),
+(17, 'Short Film', '16', 10000, 'medium', '-'),
+(18, 'Short Film', '16', 10000, 'large', '-'),
+(19, 'Cup', '14', 300, 'medium', 'black'),
+(20, 'Cup', '14', 300, 'medium', 'white'),
+(21, 'Frame', '17', 400, 'medium', 'brown'),
+(22, 'Frame', '17', 400, 'large', 'brown'),
+(23, 'Frame', '17', 400, 'small', 'black'),
+(24, 'Frame', '17', 400, 'small', 'white'),
+(25, 'Phone Cover', '19', 200, 'small', 'black');
 
 -- --------------------------------------------------------
 
@@ -247,11 +331,12 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`uid`, `fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES
 (1, 'Kalash', 'Shah', '8ce4b16b22b58894aa86c421e8759df3', 9426921383, 'male', 'Navsari', 'owner', '20bmiit040@gmail.com'),
 (6, 'jainam', 'shah', '363b122c528f54df4a0446b6bab05515', 7410852963, 'male', 'nvs', 'admin', '21bmiit079@gmai.com'),
-(19, 'aamena', 'shaikh', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com'),
+(19, 'Aamena', 'shaikh', '4124bc0a9335c27f086f24ba207a4912', 9632587410, 'female', 'chikhli', 'client', '20bmiit056@gmail.com'),
 (22, 'amit', 'bhai', 'am', 8520147963, 'male', 'nvs', 'admin', 'amit@gmail.com'),
-(27, 'varshal', 'patel', '9e3669d19b675bd57058fd4664205d2a', 9874563210, 'male', 'kumbhar faliya', 'client', '20bmiit033@gmail.com'),
+(27, 'varshal', 'patel', '9e3669d19b675bd57058fd4664205d2a', 9874563210, 'male', 'kumbhar faliya', 'admin', '20bmiit033@gmail.com'),
 (28, 'nishtha', 'tandel', 'e6c151d449e1db05b1ffb5ad5ec656cf', 7410258963, 'female', 'navsari', 'client', '20bmiit088@gmail.com'),
-(29, 'prince', 'patel', '64e1e1cbe1ca8e88ef3a838a3e7b57d6', 8520147963, 'male', 'bilimora', 'client', '20bmiit002@gmai.com');
+(29, 'prince', 'patel', '64e1e1cbe1ca8e88ef3a838a3e7b57d6', 8520147963, 'male', 'bilimora', 'client', '20bmiit002@gmai.com'),
+(30, 'Kalash', 'Shah', '8ce4b16b22b58894aa86c421e8759df3', 9632587414, 'male', 'nvs', 'client', 'k@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -264,10 +349,22 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`bid`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cid`);
+
+--
 -- Indexes for table `leaves`
 --
 ALTER TABLE `leaves`
   ADD PRIMARY KEY (`lid`);
+
+--
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`mid`);
 
 --
 -- Indexes for table `orders`
@@ -314,7 +411,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `leaves`
@@ -323,22 +426,28 @@ ALTER TABLE `leaves`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -356,7 +465,7 @@ ALTER TABLE `tbl_service_events`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
