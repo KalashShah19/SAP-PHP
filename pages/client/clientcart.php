@@ -72,18 +72,19 @@
                   <?php 
                   $total=0;
                     include '../../conn.php';
-                    $sql="select * from cart join products on cart.pid=products.pid join media on media.mid=products.mid where cart.uid=$uid;";
+                    $sql="select * from cart;";
                     $results=mysqli_query($db, $sql);
                     while($data = mysqli_fetch_array($results)){
+                      $cid = $data['cid'];
                   ?>
                   <div class="column">
                     <div class="img-box b-1">
                       <div class="img-box b-1">
-                        <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>">
-                        <br> <br> <p> Size : <?php echo $data['size']; ?> <br> </p>
-                         <p> Color : <?php echo $data['color']; ?> <br> </p>
+                        <img src="<?php echo "../../images/"."customized/".$data['image']; ?>">
+                        <br> <br> <p> Name : <?php echo $data['pname']; ?> <br> </p>
+                        <p> Size : <?php echo $data['size']; ?> <br> </p>
                         <p> Price : <?php echo $data['price']; $total=$total+$data['price']; ?> /- Rs <br> </p>
-                        <p> <a style="background-color:black; color:white" href="clientcart.php?del=<?php echo $data['pid']; ?>"> Delete </a> </p>
+                        <p> <a style="background-color:black; color:white; border:5px solid black" href="clientcart.php?del=<?php echo $cid; ?>"> Remove </a> </p>
                       </div>
                     </div>
                   </div>
@@ -105,19 +106,20 @@
     <?php 
       if(isset($_GET['del'])){
         $pid=$_GET['del'];
-        mysqli_query($db, "delete from cart where pid=$pid and uid=$uid;");
+        mysqli_query($db, "delete from cart where cid=$cid and uid=$uid;");
         $_SESSION['msg']="That Product was Deleted Successfully from Your Cart.";
         echo "<script>document.location.href='clientcart.php';</script>";
     }
 
     if(isset($_POST['pay'])){
       $ids="";
-        $res=mysqli_query($db,"select pid from cart where uid=$uid;");
+        $res=mysqli_query($db,"select pname,image from cart where uid=$uid;");
         while($str=mysqli_fetch_array($res)){
-          $ids.=",".$str['pid'];
+          $ids.=$str['pname'].",";
+          $images.=$str['image'].",";
         }
 
-        mysqli_query($db, "INSERT INTO `orders`(`uid`, `deliverystatus`, `pid`, `ordertotal`) VALUES ('$uid', 'pending', '$ids', '$total');");
+        mysqli_query($db, "INSERT INTO `orders`(`uid`, `deliverystatus`, `pname`, `ordertotal`, `image`) VALUES ('$uid', 'pending', '$ids', '$total', '$images');");
         mysqli_query($db, "delete from cart where uid=$uid;");
         echo "<script>document.location.href='clientpayment.php';</script>";
     }

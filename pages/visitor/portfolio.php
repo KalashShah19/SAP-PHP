@@ -47,171 +47,61 @@
           The Portfolio
         </h2>
         <p>
-          Our Works
+          Our Works 
         </p>
       </div>
-      <div class="portfolio_container layout_padding2">
-        <div class="row">
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/first.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/fourth.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-3.jpg" alt="">
-              <div class="btn-box">
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/fifth_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-6.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/sixth_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/portrait_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/first.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-5.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/ninth_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-          </div>
-         
-
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/third_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/fifth_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/seventh_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/first_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/seventh_image.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="../../images/p-1.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-2.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-3.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-4.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-5.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-            <div class="img-box b-1">
-              <img src="../../images/p-6.jpg" alt="">
-              <div class="btn-box">
-                 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="see_btn">
-        <a href="">
-          See More
-        </a>
-      </div>
-    </div>
+      <center>
+        <form method="POST">
+          <label> Search : </label>
+          <select name="search">
+            <option value=""> Select </option>
+            <option value="prewedding/"> Pre Wedding </option>
+            <optgroup label="Wedding">
+                <option value="haldi/"> Haldi </option>
+                <option value="mehndi/"> Mehndi </option>
+                <option value="vidai/"> Vidai </option>
+                <option value="phera/"> Phera </option>
+                <option value="mandap muhrat/"> Mandap Muhrat </option>
+                <option value="kanku/"> Kanku </option>
+            </optgroup>
+                <option value="anniversary"> Anniversary </option>
+                <option value="birthday/"> Birthday </option>
+                <option value="opening"> Inogration/Opening </option>
+                <option value="vastu poojan"> Vastu Poojan </option>
+                <option value="party"> Party </option>
+                <option value="competetion"> Competetion </option>
+                <option value="school function"> School Function </option>
+                <option value="corperate"> Corperate </option>
+                <option value="portfolio shoot"> Portfolio Shoot </option>
+                <option value="festival shoot"> Festival Shoot </option>
+                <option value="concert"> Music / Concert / Opera  </option>
+                <option value="sports tournament"> Sports Tournament </option>
+                <option value="graduation"> Graduation </option>
+                <option value="funeral"> Funeral </option>
+                <option value="festival shoot"> Festival Shoot </option>
+                <option value="award ceremony"> Award Ceremony </option>
+                <option value="political event"> Political Event </option>
+        </select> <br>
+          </select>
+          <input type="submit" name="submit" value="Search">
+        </form> <br>
+      <?php 
+      include '../../conn.php';
+      if(isset($_POST['submit'])){
+          $folder=$_POST['search'];
+          $sql="select * from media where mediafolder='$folder';";
+          $results = mysqli_query($db,$sql);
+          while ($data = mysqli_fetch_array($results)) { ?>
+      <img src="../../images/<?php echo $data['mediafolder'].$data['medianame'];?>" alt="Portfolio Image" style="margin:10px" width="40%">
+      <?php } } 
+      else { 
+          $folder='portfolio/';
+          $sql1="select * from media where mediafolder='portfolio/';";
+          $result = mysqli_query($db,$sql1);
+          while ($port = mysqli_fetch_array($result)) { ?>
+      <img src="../../images/<?php echo $port['mediafolder'].$port['medianame'];?>" alt="Portfolio Image" width="40%"  style="margin:10px"> 
+      <?php } } ?>
+    </div> </center>
 
   </section>
 

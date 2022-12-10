@@ -1,10 +1,8 @@
+<?php session_start();
+  $uid = $_SESSION['uid'];
+?>
 <!DOCTYPE html>
 <html>
-  <script>
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    
-</script>
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -60,50 +58,24 @@
             <div class="row">
               <div class="col-md-8 mx-auto">
                   <div class="contact_form-container"> <hr> 
-                    <p> Order : Frame, Cup <p> 
-                    <p> Amount : 500 </p>
-                    <p> Status : Delivering </p>
-                    <form action="clientcart.php">
-                      <button type="submit"> Cancel </button>
-                    </form>
-                    <hr> <br>
-  
-                    <p> Order : Phone Cover <p> 
-                    <p> Amount : 300 </p>
-                    <p> Status : Delivering </p>
-                    <form action="clientcart.php">
-                      <button type="submit"> Cancel </button>
-                    </form>
-                    <hr> <br>
-  
-                    <p> Order : Photo Frame <p> 
-                    <p> Amount : 250 </p>
-                    <p> Status : Deliered </p>
-                    <hr> <br>
-  
-                    <p> Order : Cushion <p> 
-                    <p> Amount : 150 </p>
-                    <p> Status : Deliered </p>
-                    <hr> <br>
-  
-                    <p> Order : Bedshhet <p> 
-                    <p> Amount : 200 </p>
-                    <p> Status : Deliered </p>
-                    <hr> <br>
+                  <center>
+                    <?php 
+                      include '../../conn.php';
+                      $results = mysqli_query($db, "SELECT * FROM `orders`;"); 
+                      while($data = mysqli_fetch_array($results)){
+                    ?>
+                      <p> Product : <?php echo $data['pname'];?> <p> 
+                        <p> Amount : <?php echo $data['ordertotal'];?> </p> 
+                        <p> Status : <?php echo $data['deliverystatus'];?> </p> 
+                        <hr> <br> 
+                    <?php } ?>
+                    </div>
                   </div>
-                </div>
+                </center>
               </div>
             </div>
           </div>
         </section>
-    
-
-  <!-- Backend 
-  <?php
-    $user=$_POST['user'];
-    $pass=$_POST['pass'];
-  
-  ?> -->
 
   <!-- info section -->
   <?php

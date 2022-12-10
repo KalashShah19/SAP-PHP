@@ -1,6 +1,5 @@
 <?php
   session_start(); 
-  
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +47,7 @@
             All Pics Folder 
         </h2>
         <p>
-            Select Best Photos for Products
+            Select Best Photos You Like
         </p>
       </div>
       <center>
@@ -62,7 +61,6 @@
         <?php } ?>
       </center>
       <div class="portfolio_container layout_padding2">
-        <div class="row">
           <?php 
           if(isset($_GET['folder'])){
             $folder=$_GET['folder'];
@@ -73,27 +71,18 @@
             $result=mysqli_query($db, $sql);
             while($data = mysqli_fetch_array($result)) {
               $name=$data['medianame'];
-              $path=$data['mediapath'];
               $mid=$data['mid'];
-              $image=$path.$folder."/".$name;
+              $image="../../images/".$folder.$name;
           ?>
-          <div class="column">
-            <div class="img-box b-1">
-              <img src="<?php echo $image; ?>">
-              <div class="btn-box">
-                <a href="clientphotos.php?id=<?php echo $mid;?>&?folder=<?php echo $folder;?>" class="btn-1">
+              <img src="<?php echo $image; ?>" width="80%"> 
+                <a href="clientphotos.php?id=<?php echo $mid;?>&?folder=<?php echo $folder;?>" style="background-color:black; color:cyan"> Select 
                 </a>
-              </div>
-            </div>
-            </div>
           <?php 
               } 
             }
           ?>
-
-        </div>
-      </div>
     </div>
+          </div>
   </section>
 
   <!-- end about section -->

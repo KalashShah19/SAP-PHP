@@ -113,7 +113,7 @@ session_start();
                             <a style="border:1px solid black;background-color:lime;color:black"  href="ownerclients.php?edit=<?php echo $data['uid'];?>#edit"> Edit </a>
                           </td>
                           <td>
-                            <a style="border:1px solid black;background-color:red;color:white" href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Delete </a>
+                            <a style="border:1px solid black;background-color:red;color:white" href="ownerclients.php?delete=<?php echo $data['uid'];?>"> Block </a>
                           </td>
                         </tr> 
                         <?php

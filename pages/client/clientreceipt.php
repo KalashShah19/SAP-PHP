@@ -1,3 +1,5 @@
+<?php session_start(); 
+$uid = $_SESSION['uid']; ?>
 <!DOCTYPE html>
 <html>
   <script>
@@ -59,36 +61,67 @@
           <div class="col-md-8 mx-auto">
             <form action="clienthome.php" method="post">
               <div class="contact_form-container">
+                <center>
                 <table class="tabl">
+                  <?php 
+                    include '../../conn.php';
+                    $res = mysqli_query($db, "select * from booking join users on users.uid = booking.uid join tbl_service_events on tbl_service_events.SrvEveID = booking.SrvEveID where booking.uid = $uid;"); 
+                    $data = mysqli_fetch_array($res);
+                  ?>
                   <tr class="tabl">
                     <td class="tabl"> Name </td>
-                    <td class="tabl"> Kalash Shah <br> <br> </td>
+                    <td class="tabl"> <?php echo $data['fname']; ?> <br> <br> </td>
                   </tr>
                   <tr class="tabl">
                     <td class="tabl"> Email </td>
-                    <td class="tabl"> kalash@gmail.com <br> <br> </td>
+                    <td class="tabl"> <?php echo $data['email']; ?> <br> <br> </td>
                   </tr>
                   <tr class="tabl">
                     <td class="tabl"> Mobile Number </td>
-                    <td class="tabl"> 9874652130 <br> <br> </td>
+                    <td class="tabl"> <?php echo $data['contact']; ?> <br> <br> </td>
                   </tr>
                   <tr class="tabl">
                   <td class="tabl"> Order </td>
-                    <td class="tabl"> Album, Cup, Stickers, Photo Frame <br> <br> </td>
+                  <td class="tabl"> <?php echo $data['event']; ?> <br> <br> </td>
+                  </tr>
+                  <tr class="tabl">
+                  <td class="tabl"> Location </td>
+                  <td class="tabl"> <?php echo $data['baddress']; ?> <br> <br> </td>
+                  </tr>
+                  <tr class="tabl">
+                  <td class="tabl"> Start Date </td>
+                  <td class="tabl"> <?php echo $data['start']; ?> <br> <br> </td>
+                  </tr>
+                  <tr class="tabl">
+                  <td class="tabl"> End Date </td>
+                  <td class="tabl"> <?php echo $data['end']; ?> <br> <br> </td>
                   </tr>
                   <tr class="tabl">
                   <td class="tabl"> Amount </td>
-                    <td class="tabl"> 30200 <br> <br> </td>
+                    <td class="tabl"> <?php echo $data['totalamount']; ?> <br> <br> </td>
                   </tr>
                   <tr class="tabl">
-                    <td class="tabl"> Payment Method </td>
-                    <td class="tabl"> UPI <br> <br> </td>
+                  <td class="tabl"> Services </td>
+                  <?php
+                    $names="";
+                    $ids = $data['SrvEveID'];
+                    $id = explode(",", $ids);
+                    foreach($id as $i){
+                      $sql1 = "select * from tbl_service_events where SrvEveID=$i";
+                      $res = mysqli_query($db, $sql1);
+                      $data = mysqli_fetch_array($res);
+                      $name = $data['SrvEveName']; 
+                      $names.=$name.",";
+                    }
+                  ?>
+                    <td class="tabl"> <?php echo $names;?> <br> <br> </td>
                   </tr>
                 </table>
                 
                 <button type="submit"> Home </button>
               </div>
             </form>
+          </center>
           </div>
         </div>
       </div>

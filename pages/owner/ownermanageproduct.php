@@ -78,14 +78,12 @@
                       <th> Name </th>
                       <th> Image </th>
                       <th> Price </th>
-                      <th> Size </th>
-                      <th> Color </th>
                       <th colspan="2"> Actions </th>
                     </tr>
 
                     <?php
                       include '../../conn.php';
-                      $sql="select * from products;";
+                      $sql="select * from products join media on media.mid = products.mid;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
                         <tr>
@@ -93,16 +91,10 @@
                             <?php echo $data['pname'];?>
                           </td>
                           <td>
-                            <?php echo $data['mid'];?>
+                            <?php echo $data['medianame'];?>
                           </td>
                           <td>
                             <?php echo $data['price'];?>
-                          </td>
-                          <td>
-                            <?php echo $data['size'];?>
-                          </td>
-                          <td>
-                            <?php echo $data['color'];?>
                           </td>
                           <td>
                             <a style="border:1px solid black;background-color:lime;color:black"  href="ownermanageproduct.php?edit=<?php echo $data['pid'];?>#edit"> Edit </a>
@@ -145,16 +137,6 @@
         <tr>
             <td><label> Price : </label></td>
             <td><input type="number" name="price" value="<?php echo $data['price'];?>"></td>
-        </tr>
-       
-        <tr>
-            <td><label> Size : </label></td>
-            <td><input type="text" name="size" value="<?php echo $data['size'];?>"></td>
-        </tr>
-       
-        <tr>
-            <td><label> Color : </label></td>
-            <td><input type="text" name="color" value="<?php echo $data['color'];?>"></td>
         </tr>
 
         <tr> 

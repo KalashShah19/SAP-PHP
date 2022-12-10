@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,37 +53,24 @@
           <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="contact_form-container"> <hr> 
-                  <form action="adminproductdetails.php" method="post"> 
-                    <h3> Name : Varshal Patel </h3>
-                    <p> Order : Frame  <p> 
-                    <button type="submit"> Details </button>
-                    <hr> <br>
+                  <form method="post"> 
+                    <center>
+                    <?php 
+                      $sql = "select * from orders join users on users.uid = orders.uid where deliverystatus='delivered';";
+                      $res = mysqli_query($db, $sql);
+                      while($data = mysqli_fetch_array($res)){ $oid=$data['oid'];
+                    ?>
+                    <h3> Name : <?php echo $data['fname'];?> </h3> 
+                    <p> Order : <?php echo $data['pname'] ?> <p> 
+                    <p> Address : <?php echo $data['address'] ?> <p> 
+                    <button type="submit" formaction="adminproductdetails.php?oid=<?php echo $oid; ?>"> Details </button> 
+                    <hr> <br> 
+                    <?php } ?>
                     
-                    <h3> Name : Aamena Shaikh </h3>
-                    <p> Order : Phone Cover <p> 
-                    <button type="submit"> Details </button>
-                    
-                    <hr> <br>
-                    
-                    <h3> Name : Nishtha Tandel </h3>
-                    <p> Order : Photo Frame <p> 
-                    <button type="submit"> Details </button>
-                        
-                    <hr> <br>
-                    
-                    <h3> Name : Nidhi Patel </h3>
-                    <p> Order : Cushion <p> 
-                    <button type="submit"> Details </button>
-                      
-                    <hr> <br>
-                    
-                    <h3> Name : Kashish Sukhadiya </h3>
-                    <p> Order : Bedsheet <p> 
-                    <button type="submit"> Details </button>
-                    <hr> <br>
                     </form>
                     </div>
                 </div>
+                      </center>
               </div>
             </div>
           </div>

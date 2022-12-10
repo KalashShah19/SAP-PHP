@@ -1,10 +1,10 @@
 <header class="header_section">
         <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11 offset-lg-1">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <div class="col-lg-11 offset-lg-0">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
                 <a class="navbar-brand" href="index.php">
-                <img src="../../images/logo.jpg" alt="" id="logo">
+                <img src="../../images/logo.jpg" alt="" style="border-radius: 10px" id="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

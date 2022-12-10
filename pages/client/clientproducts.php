@@ -59,7 +59,7 @@
           <div class="column">
             <center style="background-color: black; color: white"> <?php echo $data['pname']; ?> </center>
             <div class="img-box b-1">
-              <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>" onclick="">
+              <img src="<?php echo "../../images/".$data['mediafolder'].$data['medianame']; ?>">
               <div class="info-box">
                 <a href="clientinfo.php?pid=<?php echo $data['pid'];?>" class="info"> </a>
               </div>
@@ -78,8 +78,5 @@
     include '../../footers/footer.php';
   ?>
   <!-- footer section -->
-
- 
 </body>
-
 </html>

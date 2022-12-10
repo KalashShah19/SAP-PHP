@@ -1,5 +1,5 @@
+<?php session_start(); ?>
 <?php 
-  session_start();
   include '../../conn.php';
   $results = mysqli_query($db, "SELECT SrvEveName,SrvEveCharges FROM tbl_service_events;");
 ?>
@@ -77,9 +77,9 @@
                     <option> Select </option>
                     <option value="prewedding"> Pre Wedding </option>
                     <option value="wedding"> Wedding </option>
-                    <option value="birthday"> Birthday </option>
-                    <option value="inogration/opening"> Inogration/Opening </option>
                     <option value="anniversary"> Anniversary </option>
+                    <option value="birthday"> Birthday </option>
+                    <option value="opening"> Inogration/Opening </option>
                     <option value="vastu poojan"> Vastu Poojan </option>
                     <option value="party"> Party </option>
                     <option value="competetion"> Competetion </option>
@@ -87,7 +87,7 @@
                     <option value="corperate"> Corperate </option>
                     <option value="portfolio shoot"> Portfolio Shoot </option>
                     <option value="festival shoot"> Festival Shoot </option>
-                    <option value="music/concert/opera"> Music / Concert / Opera  </option>
+                    <option value="concert"> Music / Concert / Opera  </option>
                     <option value="sports tournament"> Sports Tournament </option>
                     <option value="graduation"> Graduation </option>
                     <option value="funeral"> Funeral </option>

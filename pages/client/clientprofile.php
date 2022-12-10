@@ -56,18 +56,21 @@
       <div class="">
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <form action="clientprofile.php" method="post">
+            <form method="post" enctype="multipart/form-data">
               <div class="contact_form-container">
                 <div>
-                  <p> Profile Picture : </p>
-                  <img src="../../images/kalash.jpg" width="100px"> <br> <br> <br>
                   <?php 
-                    $uid=$_SESSION['uid'];
+                    $uid = $_SESSION['uid'];
                     include '../../conn.php';
                     $sql="select * from users where uid=$uid;";
                     $results=mysqli_query($db, $sql);
                     while($data = mysqli_fetch_array($results)) {
                   ?>
+
+                  <div>
+                    <label> Profile Photo : </label>
+                    <input type="file" name="media">
+                  </div>
                   <div>
                     <label> First Name : </label>
                     <input type="text" name="fname" value="<?php echo $data['fname'];?>">
@@ -144,11 +147,65 @@
     $address=$_POST['address'];
     $contact=$_POST['contact'];
     $gender=$_POST['gender'];
-    
-    $sql="UPDATE `users` SET `fname`='$fname',`lname`='$lname',`contact`='$contact',`gender`='$gender',`address`='$address',`email`='$email' WHERE uid=$uid;";
-    mysqli_query($db, $sql);
-    echo '<script> alert("Your Profile has been Updated Successfully.");</script>';
-    echo '<script> document.location.href="clientprofile.php";</script>';
+
+    $dir="../../images/";
+    $folder='profiles/';
+    $file_name = $_FILES['media']['name'];
+    $file_size = $_FILES['media']['size'];
+    $file_tmp = $_FILES['media']['tmp_name'];
+    $file_type = $_FILES['media']['type'];
+    $arr = explode('.',$_FILES['media']['name']);
+    $file_ext = strtolower(end($arr));
+    $target_file = $dir.$folder . basename($_FILES["media"]["name"]);
+    $path = $dir.$folder.$file_name;
+      
+    $extensions= array("jpeg","jpg","png");
+
+      if(in_array($file_ext,$extensions)=== false){
+         $errors[]="Extension not allowed, please choose a JPEG or PNG file.";
+      }
+      
+      function compressImage($source, $destination, $quality) { 
+        // Get image info 
+        $imgInfo = getimagesize($source); 
+        $mime = $imgInfo['mime']; 
+         
+        // Create a new image from file 
+        switch($mime){ 
+            case 'image/jpeg': 
+                $image = imagecreatefromjpeg($source); 
+                break; 
+            case 'image/png': 
+                $image = imagecreatefrompng($source); 
+                break; 
+            case 'image/gif': 
+                $image = imagecreatefromgif($source); 
+                break; 
+            default: 
+                $image = imagecreatefromjpeg($source); 
+        } 
+         
+        // Save image 
+        imagejpeg($image, $destination, $quality); 
+         
+        // Return compressed image 
+        return $destination; 
+    } 
+      
+      if(empty($errors)==true){
+        $compressedImage = compressImage($file_tmp, $path, 75); 
+          if($compressedImage){ 
+            $sql="UPDATE `users` SET `fname`='$fname',`lname`='$lname',`contact`='$contact',`gender`='$gender',`address`='$address',`email`='$email', profile='$file_name' WHERE uid=$uid;";
+            mysqli_query($db, $sql);
+            echo '<script> alert("Your Profile has been Updated Successfully.");</script>';
+            // echo "Profile Photo Updated Successfully!!";
+            echo '<script> document.location.href="clientprofile.php";</script>';
+          } else{
+            echo "Error, while uploading Image.";
+          }
+      }else{
+         print_r($errors);
+      }
   }
 
   if(isset($_POST['change'])){ ?>

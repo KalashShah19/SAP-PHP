@@ -72,30 +72,30 @@
                 <div>
                   <div>
                     <label> First Name : </label>
-                    <input type="text" name="fname">
+                    <input type="text" name="fname" required>
                   </div>
                   <div>
                     <label> Last Name : </label>
-                    <input type="text" name="lname">
+                    <input type="text" name="lname" required>
                   </div>
                   <div>
                     <label> Password : </label>
-                    <input type="password" name="pass">
+                    <input type="password" name="pass" required>
                   </div>
                   <div>
                     <label> Confirm Password : </label>
-                    <input type="password" name="cpass">
+                    <input type="password" name="cpass" required>
                   </div>
                   <div>
                     <label> Phone Number : </label>
-                    <input type="number" name="num">
+                    <input type="number" name="num" required>
                   </div>
                   <div>
                     <label> Gender : </label>
                     <table>
                       <tr>
                         <td>
-                          <input type="radio" id="male" name="gender" value="male"> 
+                          <input type="radio" id="male" name="gender" value="male" > 
                         </td>
                         <td>
                           <label for="male"> Male </label>
@@ -118,11 +118,11 @@
                   </div>
                   <div>
                     <label> Email : </label>
-                    <input type="text" name="email">
+                    <input type="text" name="email" required>
                   </div>
                   <div>
                     <label> Address : </label>
-                    <input type="text"  name="add">
+                    <input type="text"  name="add" required>
                   </div>
                   <div class=" d-flex justify-content-center ">
                     <!-- <button type="submit" style="border: solid 2px white;" name="submit">
@@ -150,31 +150,38 @@
       $fname=$_POST['fname'];
       $lname=$_POST['lname'];
       $pass=md5($_POST['pass']);
-      // $cpass=$_POST['cpass'];
+      $cpass=md5($_POST['cpass']);
       $num=$_POST['num'];
       $gender=$_POST['gender'];
       $email=$_POST['email'];
       $add=$_POST['add'];
       $type="client";
     
-      $reg=0;
+      $reg=1;
       $numberpattern="/^[0-9]{10}+$/";
-        if(isset($num))
-        {
-          if(preg_match($numberpattern, $num)==0) {
-            $reg=0;
-            echo '<script> alert("Invalid Mobile Number !"); </script>';
-          }else {
-            include '../../conn.php';
-
-            if($reg==1)
-            $sql = "INSERT INTO `users`(`fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$lname', '$pass', '$num', '$gender', '$add', '$type', '$email');";
-            mysqli_query($db,$sql);
-            echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';
-            echo "<script type='text/javascript'>document.location.href='login.php';</script>";
-          }
-        }   
+      if ((ctype_alpha($fname) === false) && (ctype_alpha($lname) === false)) {
+        $reg=0;
+        echo '<script> alert("Invalid Name !"); </script>';
       }
+
+      if(preg_match($numberpattern, $num)==0) {
+        $reg=0;
+        echo '<script> alert("Invalid Mobile Number !"); </script>';
+      }
+
+      if($pass != $cpass){
+        $reg=0;
+        echo '<script> alert("Passwords Don\'t Match !"); </script>';
+      }
+      
+      include '../../conn.php';
+      if($reg==1) {
+      $sql = "INSERT INTO `users`(`fname`, `lname`, `password`, `contact`, `gender`, `address`, `usertype`, `email`) VALUES ('$fname', '$lname', '$pass', '$num', '$gender', '$add','$type','$email');";
+      mysqli_query($db,$sql);
+      echo '<script> alert("Your Account Has Been Successfully Registered!!!");</script>';
+      echo "<script type='text/javascript'>document.location.href='login.php';</script>";
+      }
+    }
     ?>
 
    <!-- info section -->

@@ -14,7 +14,7 @@
             <a href="https://www.linkedin.com/company/shahabhayphotography" target="_blank">
                 <img src="../../images/linkedin.png" alt="LinkedIn" id="in">
               </a>
-            <a href="https://www.instagram.com/shahabhayphotographer/" target="_blank">
+            <a href="https://www.instagram.com/shah.abhay.photography/" target="_blank">
               <img src="../../images/instagram.png" alt="InstaGram" id="insta">
             </a>
               <a href="https://www.facebook.com/abhayshahnvs" target="_blank">

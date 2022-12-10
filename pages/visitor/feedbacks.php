@@ -62,25 +62,25 @@
           <div class="col-md-8 mx-auto">
             <form action="userhome.php" method="post">
               <div class="contact_form-container"> <hr> 
-                <h3> Aamena Shaikh </h3>
-                <p> I tried my Portfolio Shoot with Shah Abhay PhotoGraphy, and the results were just Satisfying. The Trial turned out to be Awesome.</p> <hr>
-                <h3> Nishtha Tandel </h3>
-                <p> My parents booked Shah Abhay PhotoGraphy for the Shoot of my Birthday. The Highlights and Portrait Photos were just Terrifying, I loved them all. </p> <hr>
-                <h3> Smit Shah </h3>
-                <p> We Recently did Pre-Wedding Shoot with Shah Abhay PhotoGraphy, and it turned out to be Amazing. The Poses and Pictures were Just Awsome. And The Final Video Edits and Effects were Stunning. </p> <hr>
-                <h3> Krushi Shah </h3>
-                <p> I tried my Portfolio Shoot with Shah Abhay PhotoGraphy, and the results were just Satisfying. The Trial turned out to be Awesome.</p> <hr>
-                <h3> Virti Mehta </h3>
-                <p> My parents booked Shah Abhay PhotoGraphy for the Shoot of my Birthday. The Highlights and Portrait Photos were just Terrifying, I loved them all. </p> <hr>
-                <h3> Jainam Shah </h3>
-                <p> We Recently did Pre-Wedding Shoot with Shah Abhay PhotoGraphy, and it turned out to be Amazing. The Poses and Pictures were Just Awsome. And The Final Video Edits and Effects were Stunning. </p> <hr>
-                <h3> Varshal Patel </h3>
-                <p> I tried my Portfolio Shoot with Shah Abhay PhotoGraphy, and the results were just Satisfying. The Trial turned out to be Awesome.</p> <hr>
-                <h3> Jay Naik </h3>
-                <p> My parents booked Shah Abhay PhotoGraphy for the Shoot of my Birthday. The Highlights and Portrait Photos were just Terrifying, I loved them all. </p> <hr>
-                <h3> Nidhi Patel </h3>
-                <p> We Recently did Pre-Wedding Shoot with Shah Abhay PhotoGraphy, and it turned out to be Amazing. The Poses and Pictures were Just Awsome. And The Final Video Edits and Effects were Stunning. </p> <hr>
-                             
+                <table style="text-align:center">
+                  <tr>
+                    <th> Name </th>
+                    <th> Rating </th>
+                    <th> Experience </th>
+                  </tr>
+                <?php
+                  include '../../conn.php';
+                  $sql = "select * from reviews join users on users.uid = reviews.uid where rating >= 4.5;";
+                  $res = mysqli_query($db, $sql);
+                  while($data = mysqli_fetch_array($res)){
+                ?>  
+                  <tr>
+                    <td> <?php echo $data['fname'] ?> </td>
+                    <td> <?php echo $data['rating'] ?> </td>
+                    <td> <?php echo $data['experience'] ?> </td>
+                  </tr>
+                  <?php } ?>
+                </table>
               </div>
             </form>
           </div>

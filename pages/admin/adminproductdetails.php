@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@
   <meta name="author" content="" />
 
   <title> Shah Abhay PhotoGraphy | Order Details </title>
-
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
@@ -94,17 +94,26 @@
         <div class="">
           <div class="row">
             <div class="col-md-8 mx-auto">
+              <?php
+               include '../../conn.php';
+                $sql = "select * from orders join users on users.uid = orders.uid where deliverystatus='pending'";
+                $res = mysqli_query($db, $sql);
+                while($data = mysqli_fetch_array($res)){
+              ?>
                 <div class="contact_form-container"> <hr> 
-                  <form action="adminbooking.php" method="post"> 
-                    <h3> Name : Varshal Patel </h3>
-                    <p> Order : Frame <p> 
-                    <p> Size : Medium <p> 
-                    <p> Color : Blue <p>  
-                    <img src="../../products/frame.jfif" width="150px">
-                    <button type="submit"> Delivered </button>
-                    <hr> <br>        
-                    </form>
-                    </div>
+                  <p> Name : <?php echo $data['fname']; ?> </p>
+                  <p> Order : <?php echo $data['pname']; ?> <p>    
+                    <?php 
+                      $arr = $data['image'];
+                      $images = explode(",",$arr);
+                      foreach($images as $image){
+                    ?>
+                  <img src="../../images/customized/<?php echo $image;?>" width="150px"> <br> 
+                  <?php } ?>
+                  <a href=""> Delivered </a>
+                  <hr> <br>
+                  </div>
+                  <?php } ?>
               </div>
             </div>
           </div>

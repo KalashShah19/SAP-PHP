@@ -73,15 +73,17 @@
                     <div class="column">
                       <div class="img-box b-1">
                       <?php 
+                        $pname;
+                        $price;
                         if(isset($_GET['pid'])){
                           $pid=$_GET['pid'];
                         }
                         $results=mysqli_query($db, "select * from products join media on media.mid=products.mid where pid=$pid GROUP BY pname;");
                         while($data = mysqli_fetch_array($results)){
                       ?>
-                        <h2> <?php echo $data['pname'] ?> </h2>   
-                      <form method="POST">
-                          <img src="<?php echo $data['mediapath'].$data['mediafolder'].$data['medianame']; ?>">
+                        <h2> <?php $pname=$data['pname']; echo $data['pname'] ?> </h2>   
+                      <form method="POST" enctype="multipart/form-data">
+                          <img src="<?php echo "../../images/".$data['mediafolder'].$data['medianame']; ?>">
                         </div>
                       </div>
                       <div class="column">
@@ -94,37 +96,22 @@
                            <label for="size"> Size : </label>
 
                           <select id="size" name="size">
-                            <?php 
-                              $pname=$data['pname'];
-                              $sql1="select distinct size from products where pname='$pname'";
-                              $res=mysqli_query($db, $sql1); 
-                              while($d = mysqli_fetch_array($res)){  ?>
-                              <option value="<?php echo $d['size']; ?>"> <?php echo $d['size']; ?> </option>
-                            <?php } ?>
+                            <option value="big"> Big </option>
+                            <option value="medium"> Medium </option>
+                            <option value="small"> Small </option>
                           </select>
-                          
-                          <br> <br>
-                          <label for="color"> Color : </label>
-                          <select id="color" name="color">
-                          <?php 
-                              $pname=$data['pname'];
-                              $sql2="select distinct color from products where pname='$pname'";
-                              $re=mysqli_query($db, $sql2); 
-                              while($dt = mysqli_fetch_array($re)){  ?>
-                              <option value="<?php echo $dt['color']; ?>"> <?php echo $dt['color']; ?> </option>
-                            <?php } ?>
-                          </select> 
                             
                           <br> <br>
-                          <p> Price : <?php echo $data['price'];?> /- Rs <br> </p> 
+                          <p> Price : <?php $price=$data['price']; echo $data['price'];?> /- Rs <br> </p> <br>
+
+                          <p> Upload Image : </p>
+                          <input type="file" name="media">
                         </div>
                       </div>
                     </div>
                     <?php } ?>
                 <div class=" d-flex justify-content-center ">
-                    <button type="submit" name="cart">
-                    Add to Cart
-                </button> 
+                    <button type="submit" name="cart"> Add to Cart </button> 
             </div>
         </div>
        </div>
@@ -136,12 +123,69 @@
     </section>
 
     <?php 
-      $coid=0;
       if(isset($_POST['cart'])){
-        $sql3="insert into cart (uid, pid) values('$uid','$pid');";
+
+        $dir="../../images/";
+        $folder='customized/';
+        $file_name = $_FILES['media']['name'];
+        $file_size = $_FILES['media']['size'];
+        $file_tmp = $_FILES['media']['tmp_name'];
+        $file_type = $_FILES['media']['type'];
+        $arr = explode('.',$_FILES['media']['name']);
+        $file_ext = strtolower(end($arr));
+        $target_file = $dir.$folder . basename($_FILES["media"]["name"]);
+        $path = $dir.$folder.$file_name;
+          
+        $extensions= array("jpeg","jpg","png");
+    
+          if(in_array($file_ext,$extensions)=== false){
+             $errors[]="Extension not allowed, please choose a JPEG or PNG file.";
+          }
+    
+          function compressImage($source, $destination, $quality) { 
+            // Get image info 
+            $imgInfo = getimagesize($source); 
+            $mime = $imgInfo['mime']; 
+             
+            // Create a new image from file 
+            switch($mime){ 
+                case 'image/jpeg': 
+                    $image = imagecreatefromjpeg($source); 
+                    break; 
+                case 'image/png': 
+                    $image = imagecreatefrompng($source); 
+                    break; 
+                case 'image/gif': 
+                    $image = imagecreatefromgif($source); 
+                    break; 
+                default: 
+                    $image = imagecreatefromjpeg($source); 
+            } 
+             
+            // Save image 
+            imagejpeg($image, $destination, $quality); 
+             
+            // Return compressed image 
+            return $destination; 
+        } 
+          
+        if(empty($errors)==true){
+          if(move_uploaded_file($file_tmp,$path)){
+            echo '<script> alert("Photo has been Uploaded Successfully.");</script>';
+          } else{
+            echo "Error, while uploading Image.";
+          }
+      }else{
+          print_r($errors);
+      }
+
+
+        $size = $_POST['size'];
+        $image=$_FILES['media']['name'];
+        $sql3="INSERT INTO `cart`( `pname`, `size`, `price`, `image`, `uid`) VALUES ('$pname', '$size', '$price', '$image','$uid');";
         mysqli_query($db, $sql3);
         $_SESSION['msg']="Product was Added Successfully in Your Cart.";
-        echo '<script> document.location.href="clientcart.php";</script>';
+        echo '<script> document.location.href="clientcart.php";</script';
       }
     ?>
   

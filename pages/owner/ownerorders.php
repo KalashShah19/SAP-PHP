@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     
@@ -69,7 +70,7 @@
 
                     <?php
                       include '../../conn.php';
-                      $sql="select fname, orders.pid,ordertotal,pname from orders join users on orders.uid=users.uid join products on products.pid=orders.pid;";
+                      $sql="select * from orders join users on users.uid = orders.uid;";
                       $results = mysqli_query($db,$sql);
                       while ($data = mysqli_fetch_array($results)) { ?>
                         <tr>
@@ -77,19 +78,7 @@
                             <?php echo $data['fname'];?>
                           </td>
                           <td>
-                            <?php 
-                              $pid=$data['pid'];
-                              $ID = explode(",", $pid);
-                              $sql1="select * from products;";
-                              $res = mysqli_query($db,$sql1);
-                              while ($srv = mysqli_fetch_array($res)) { 
-                                foreach($ID as $id){
-                                  if($id == $srv['pid']){
-                                    echo $srv['pname']."<br>";
-                                  }
-                                }
-                              }
-                              ?>
+                            <?php echo $data['pname'];?>
                           </td>
                           <td>
                             <?php echo $data['ordertotal'];?>

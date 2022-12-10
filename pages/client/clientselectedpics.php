@@ -74,11 +74,10 @@
             $result=mysqli_query($db, $sql);
             while($data = mysqli_fetch_array($result)) {
               $name=$data['medianame'];
-              $path=$data['mediapath'];
               $mid=$data['mid'];
               $folder=$data['mediafolder'];
-              $image=$path.$folder."/".$name;
-          ?>
+              $image="../../images/".$folder.$name;
+        ?>
           <div class="column">
             <div class="img-box b-1">
               <img src="<?php echo $image; ?>" alt="">

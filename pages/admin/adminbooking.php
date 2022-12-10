@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -52,76 +53,39 @@
           <div class="row">
             <div class="col-md-8 mx-auto">
               <form action="clienthome.php" method="post">
+                <center>
                 <div class="contact_form-container"> <hr> 
-                  <h3> Name : Varshal Patel </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                  <form>
-                    <button> Available </button>
-                    <button> Unavailable </button>
-                  </form>
+                <?php 
+                  include '../../conn.php';
+                  $res = mysqli_query($db, "select * from booking join users on users.uid = booking.uid where bstatus ='pending';");
+                  while($data = mysqli_fetch_array($res)) { $bid=$data['bid'];
+                 ?>
+                  <p> Name : <?php echo $data['fname'];?> </p>
+                  <p> Event : <?php echo $data['event'];?> <p> 
+                  <p> Start Date : <?php echo $data['start'];?> <p> 
+                  <p> Start Date : <?php echo $data['end'];?><p> 
+                  <form> 
+                    <a href="adminbooking.php?avail=<?php echo $bid; ?>" style="background:black;color:cyan; padding: 5px"> Available </a>
+                    <a href="adminbooking.php?unavail=<?php echo $bid; ?>" style="background:black;color:cyan;margin:10px; padding:5px"> Unavailable </a>
+                  </form> 
                   <hr>
-
-                  <h3> Name : Nishtha Tandel </h3>
-                  <p> Event Type : Birthday </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                    <form>
-                      <button> Available </button>
-                    <button> Unavailable </button>
-                    </form>  
-                  <hr>
-
-                  <h3> Name : Aamena Shaikh </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                    <form>
-                      <button> Available </button>
-                    <button> Unavailable </button>
-                    </form> 
-                  <hr>
-
-                  <h3> Name : Jainam Shah </h3>
-                  <p> Event Type : Birthday </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                    <form>
-                      <button> Available </button>
-                    <button> Unavailable </button>
-                    </form>
-                  <hr>
-
-                  <h3> Name : Kashish Sukhadiya </h3>
-                  <p> Event type : Portfolio Shoot <p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>   
-                    <form>
-                      <button> Available </button>
-                    <button> Unavailable </button>
-                    </form>
-                  <hr>
-
-                  <h3> Name : Nidhi Patel </h3>
-                  <p> Event Type : Pre-Wedding </p> 
-                  <p> Start Date : 12/08/2022 <p> 
-                  <p> Start Date : 12/08/2022 <p>  
-                    <form>
-                      <button> Available </button>
-                    <button> Unavailable </button>
-                    </form>
-                  <hr>
-
+                  <?php } ?>
                 </div>
               </form>
             </div>
           </div>
+        </center>
         </div>
       </div>
     </section>
   
-  
+  <?php
+    if(isset($_GET['avail'])){
+      $bid=$_GET['avail'];
+      mysqli_query($db, "update booking_details set status = 'available' where bdid = $bdid;");
+      
+    }
+  ?>
 
   <!-- info section -->
   <?php

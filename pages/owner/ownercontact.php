@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <script>
@@ -69,7 +70,6 @@
                     <table>
                       <tr>
                         <th> First Name </th>
-                        <th> Middle Name </th>
                         <th> Last Name </th>
                         <th> Email </th>
                         <th> Message </th>
@@ -82,7 +82,6 @@
                         while ($data = mysqli_fetch_array($results)) { ?>
                       <tr>
                         <td> <?php echo $data['cfname']; ?></td>
-                        <td> <?php echo $data['cmname']; ?></td>
                         <td> <?php echo $data['clname']; ?></td>
                         <td> <?php echo $data['cemail']; ?></td>
                         <td> <?php echo $data['cmsg']; ?></td>
